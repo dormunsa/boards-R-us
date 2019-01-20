@@ -1,7 +1,11 @@
 const express = require('express');
 // const ideaCtl = require('./controllers/idea.ctl');
+const snowboardCtl = require('./controllers/snowboards.ctl')
 const app = express();
 const port = process.env.PORT || 3000;
+
+// app.use(express.json())
+app.use(express.urlencoded({extended: true}))
 
 app.set('port',port);
 // app.use('/', express.static('./public')); // for API
@@ -13,6 +17,8 @@ app.set('port',port);
 //  });
 
 /*** All routes ***/
+app.get('/getAllSnowboards', snowboardCtl.getAllSnowboards)
+app.get('/getSnowboardByStyle', snowboardCtl.getSnowboardByStyle)
 // app.get('/final-ideas/getAllIdeas', ideaCtl.getData);
 //app.get('/final-ideas/saveNewIdea', ideaCtl.saveData);
 //app.get('/final-ideas/updateIdea', ideaCtl.updateData);
