@@ -1,5 +1,6 @@
 const express = require('express');
 // const ideaCtl = require('./controllers/idea.ctl');
+const snowboardCtl = require('./controllers/snowboards.ctl')
 const app = express();
 const userCtl= require('./controllers/users.ctl')
 const bodyParser = require('body-parser');
