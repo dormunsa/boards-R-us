@@ -31,11 +31,10 @@ var user_controller_method = {
         console.log("Update User User");
         const newUser = new User(req.body);
         console.log(req.body)
-        const result = await country.findOneAndUpdate(
-            {id: req.params.id}, 
-             {number_of_competing: req.params.newNumber}
-        )
-        const result = await newUser.save()
+        // const result = await country.findOneAndUpdate(
+        //     {id: req.params.id}, 
+        //      {number_of_competing: req.params.newNumber}
+        // )
         if(result){
             res.json(result)
         } else {
@@ -51,22 +50,7 @@ var user_controller_method = {
        
       },
 
-      async MarkUnlike(req, res){
-        console.log("Update User User");
-        const newUser = new User(req.body);
-        console.log(req.body)
-        const result = await country.findOneAndUpdate(
-            {$push: { "childrens": employee._id }},
-            {number_of_competing: req.params.newNumber}
-        )
-        const result = await newUser.save()
-        if(result){
-            res.json(result)
-        } else {
-            res.status(404).send("data not found")
-        }
-       
-      },
+      
 
 
        
