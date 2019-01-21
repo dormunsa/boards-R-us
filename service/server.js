@@ -26,6 +26,8 @@ app.set('port',port);
 /*** All routes ***/
 app.get('/getAllSignedUsers', userCtl.getAllSignedUsers);
 app.get('/checkIfUserIsSigned', userCtl.checkIfUserIsSigned)
+app.get('/getStyle/:ridingStyle', snowboardCtl.getspecificsnow)
+app.put('/CreateUserProfile', userCtl.CreateUserProfile)
 app.post('/addNewUser', userCtl.addNewUser);
 app.put('/updateUserProfile', userCtl.updateUserProfile);
 // app.get('/getSnowboardByStyles/:RidingStyle', snowboardCtl.getSnowboardByStyles);

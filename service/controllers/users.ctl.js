@@ -1,8 +1,10 @@
 const mongoose = require('mongoose');
 const User = require('../models/user');
 const snowboardCtl = require ('./snowboards.ctl') 
-
-
+var requestify = require('requestify');
+var request = require('request');
+var snowboardsByStyle
+var devApi="http://localhost:3000"
 // var user_controller_method = {
     
     //    async getAllusers(req, res) {
@@ -110,6 +112,7 @@ module.exports = {
                         height: newHeight,
                         shoeSize: newShoeSize
                     }
+
                 }
             }
         )
@@ -128,5 +131,62 @@ module.exports = {
     //     if(doc) res.json(doc)
     //     else res.status(404).send("not found")
     //   },
+
+    async CreateUserProfile(req, res) {
+        console.log("getByStyle()")
+        var ID = req.body.id
+        var newLevel = req.body.level
+        var newRidingStyle = req.body.ridingStyle
+        var newWeight = req.body.weight
+        var newHeight = req.body.height
+        var newShoeSize = req.body.shoeSize
+        var topPicks = [];
+        
+     request(`${devApi}/getStyle/${newRidingStyle}`, async (error, response, body) =>{
+        if(error){
+            console.log('error:', error); // Print the error if one occurred
+            res.status(404).send("not found")
+        }
+        if(body){
+            
+            snowboardsByStyle=body
+            var myObject = JSON.parse(snowboardsByStyle);
+            for (var i = 0; i < myObject.length; i++) {
+                console.log(myObject[i])
+                topPicks.push(myObject[i].id)
+            }
+            console.log(topPicks)
+            const result = await User.updateOne(
+            {id: ID}, 
+            {
+                $set: {
+                    level: newLevel,
+                    ridingStyle: newRidingStyle,
+                    topPicks:topPicks,
+                    bodyMeasures: {
+                        weight: newWeight,
+                        height: newHeight,
+                        shoeSize: newShoeSize
+                    }
+                    
+                    
+                }
+            }
+        )
+        
+        const updatedUser = await User.findOne({id: ID})
+    
+        if(result){
+            
+            res.json(updatedUser)
+        }
+        else res.status(404).send("not found")
+     
+            
+        }
+});
+
+       
+    },
 
 }
