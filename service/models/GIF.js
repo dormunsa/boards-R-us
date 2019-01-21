@@ -15,5 +15,5 @@ const GIFs_schema = new mongoose.Schema({
 })
 
 
-const GIFs_model = mongoose.model('GIFs',GIFs_schema)
+const GIFs_model = mongoose.model('gifs',GIFs_schema)
 module.exports = GIFs_model
