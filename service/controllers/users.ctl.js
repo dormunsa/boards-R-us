@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('../models/user');
-const Snowboards = require ('') // access the MODEL
+const Snowboards = require ('./snowboards.ctl') // access the MODEL
 
 
 var user_controller_method = {
@@ -43,9 +43,12 @@ var user_controller_method = {
         }
        
       },
-      GetTopFiveBoards(userDetails){
-        
-
+      
+      async GetTopFiveBoards(userDetails){
+        console.log("inside");
+        var doc= Snowboards.getSnowboardByStyles("Freestyle")
+        console.log(doc);
+       
       },
 
       async MarkUnlike(req, res){

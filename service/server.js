@@ -25,7 +25,7 @@ app.set('port',port);
 /*** All routes ***/
 // app.get('/getAllUsers', userCtl.getAllusers);
 // app.post('/addnewuser', userCtl.AddUserFromGmail);
-//app.get('/final-ideas/updateIdea', ideaCtl.updateData);
+app.get('/top', userCtl.GetTopFiveBoards);
 //app.get('/final-ideas/deleteIdea', ideaCtl.deleteData);
 
 app.listen(port, () => console.log(`listening on port ${port}`));

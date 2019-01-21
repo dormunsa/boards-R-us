@@ -10,14 +10,27 @@ exports.getAllSnowboards = (req, res) => {
         .catch(err => console.log(`query error: ${err}`))
 }
 
-exports.getSnowboardByStyle = (req, res) => {
-    userStyle = req.body.userStyle
-    Snowboard.find({ridingStyle: userStyle})
-        .then(docs => {
-            console.log("getSnowboardByStyle()")
-            console.log(docs)
-            return res.json(docs)
-        })
-        .catch(err => console.log(`query error: ${err}`))
+
+newuser ={
+      getSnowboardByStyles(userdetails) {
+          var docs
+         function getData(userdetails){
+            result =  Snowboard.find({ridingStyle: userdetails}).exec()
+            return result;
+          }
+         var promise = getData(userdetails);
+    
+         promise.then( (jedis)=> {
+            docs=jedis;
+            console.log(jedis);
+            return docs
+         }).error((error)=>{
+            console.log(error);
+         });
+       return docs 
+     }
+
+     
 }
+module.exports = newuser
 
