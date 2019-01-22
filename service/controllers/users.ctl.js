@@ -5,6 +5,7 @@ var requestify = require('requestify');
 var request = require('request');
 var snowboardsByStyle
 var devApi = "http://localhost:3000"
+var devApi2 = "https://boards-r-us-mm.herokuapp.com/"
 var productionapi = "heroku..."
 var userCount = 17
 // var user_controller_method = {
@@ -154,7 +155,7 @@ module.exports = {
         console.log(newDislikeList)
         var topPicks = [];
         console.log(newRidingStyle)
-        request(`${devApi}/getStyle/${newRidingStyle}`, async (error, response, body) => {
+        request(`${devApi2}/getStyle/${newRidingStyle}`, async (error, response, body) => {
             if (error) {
                 console.log('error:', error); // Print the error if one occurred
                 res.status(404).send("not found")
@@ -229,7 +230,7 @@ module.exports = {
         var newRidingStyle = req.body.ridingStyle
 
         var topPicks = [];
-        request(`${devApi}/getStyle/${newRidingStyle}`, async (error, response, body) => {
+        request(`${devApi2}/getStyle/${newRidingStyle}`, async (error, response, body) => {
             if (error) {
                 console.log('error:', error); // Print the error if one occurred
                 res.status(404).send("not found")
