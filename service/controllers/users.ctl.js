@@ -5,7 +5,7 @@ var requestify = require('requestify');
 var request = require('request');
 var snowboardsByStyle
 var devApi = "http://localhost:3000"
-var devApi2 = "https://boards-r-us-mm.herokuapp.com/"
+var devApi2 = "https://boards-r-us-mm.herokuapp.com"
 var productionapi = "heroku..."
 var userCount = 17
 // var user_controller_method = {
