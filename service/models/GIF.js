@@ -8,8 +8,8 @@ const GIFs_schema = new mongoose.Schema({
     rank: { type : Number, required: false},
     weather: { 
         temperature: { type: Number,  max: 150, required: true },
-        snowLevel: { type: Number, min: 0, max: 20, required: true },
-        wind: { type: Number, min: 0, max: 60, required: true }
+        icon: { type: String, required: true },
+        windSpeed: { type: Number, min: 0, max: 60, required: true }
     }
 
 })

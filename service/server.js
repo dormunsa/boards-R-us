@@ -27,9 +27,10 @@ app.set('port',port);
 app.get('/getAllSignedUsers', userCtl.getAllSignedUsers);
 app.get('/checkIfUserIsSigned', userCtl.checkIfUserIsSigned)
 app.get('/getStyle/:ridingStyle', snowboardCtl.getSnowboardByStyles)
-app.put('/CreateUserProfile', userCtl.CreateUserProfile)
+app.put('/updateUserProfile', userCtl.updateUserProfile)
 app.post('/addNewUser', userCtl.addNewUser);
-app.put('/updateUserProfile', userCtl.updateUserProfile);
+app.put('/markUnlikeSnowboard',userCtl.markUnlikeSnowboard)
+// app.put('/updateUserProfile', userCtl.updateUserProfile);
 // app.get('/getSnowboardByStyles/:RidingStyle', snowboardCtl.getSnowboardByStyles);
 // app.get('/GetTopFiveBoards', userCtl.GetTopFiveBoards);
 app.get('/getTopGIFs', gifsCtl.getTopGIFs);
