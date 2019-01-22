@@ -19,8 +19,8 @@ const Snowboard = require('../models/snowboard');
 //         .catch(err => console.log(`query error: ${err}`))
 // }
 module.exports= {
-    async getspecificsnow(req, res) {
-        console.log("getspecificsnow()")
+    async getSnowboardByStyles(req, res) {
+        console.log("getSnowboardByStyles()")
     
         console.log (req.params.ridingStyle)
         result= await Snowboard.find({ ridingStyle: req.params.ridingStyle})

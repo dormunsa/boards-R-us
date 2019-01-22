@@ -5,6 +5,7 @@ var requestify = require('requestify');
 var request = require('request');
 var snowboardsByStyle
 var devApi="http://localhost:3000"
+var productionapi="heroku..."
 // var user_controller_method = {
     
     //    async getAllusers(req, res) {
@@ -142,7 +143,7 @@ module.exports = {
         var newShoeSize = req.body.shoeSize
         var topPicks = [];
         
-     request(`${devApi}/getStyle/${newRidingStyle}`, async (error, response, body) =>{
+        request(`${devApi}/getStyle/${newRidingStyle}`, async (error, response, body) =>{
         if(error){
             console.log('error:', error); // Print the error if one occurred
             res.status(404).send("not found")
@@ -150,7 +151,9 @@ module.exports = {
         if(body){
             
             snowboardsByStyle=body
+            console.log(snowboardsByStyle)
             var myObject = JSON.parse(snowboardsByStyle);
+            console.log(myObject)
             for (var i = 0; i < myObject.length; i++) {
                 console.log(myObject[i])
                 topPicks.push(myObject[i].id)
@@ -186,7 +189,8 @@ module.exports = {
         }
 });
 
-       
+
+
     },
 
 }
