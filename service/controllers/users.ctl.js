@@ -5,9 +5,11 @@ var requestify = require('requestify');
 var request = require('request');
 var snowboardsByStyle
 var devApi = "http://localhost:3000"
-var devApi2 = "https://boards-r-us-mm.herokuapp.com"
 var productionapi = "heroku..."
 var userCount = 17
+
+
+
 // var user_controller_method = {
 
 //    async getAllusers(req, res) {
@@ -154,71 +156,133 @@ module.exports = {
         var newDislikeList = req.body.dislikeList
         console.log(newDislikeList)
         var topPicks = [];
+
         console.log(newRidingStyle)
-        request(`${devApi2}/getStyle/${newRidingStyle}`, async (error, response, body) => {
-            if (error) {
-                console.log('error:', error); // Print the error if one occurred
-                res.status(404).send("not found")
-            }
-            if (body) {
+      
+        snowboardCtl.getSnowboardByStyles("Freestyle")
+        .then(async (result) => {
+            console.log(result)
+            snowboardsByStyle = result
+            console.log(snowboardsByStyle)
+            // console.log(snowboardsByStyle)
+            // var myObject = JSON.parse(snowboardsByStyle);
+            // console.log(myObject)
 
-                snowboardsByStyle = body
-                console.log(snowboardsByStyle)
-                var myObject = JSON.parse(snowboardsByStyle);
-                console.log(myObject)
+            for (var i = 0; i < snowboardsByStyle.length; i++) {
+                if (newDislikeList.length > 0) {
+                    for (var j = 0; j < newDislikeList.length; j++) {
 
-                for (var i = 0; i < myObject.length; i++) {
-                    if (newDislikeList.length > 0) {
-                        for (var j = 0; j < newDislikeList.length; j++) {
+                        if (snowboardsByStyle[i].id != newDislikeList[j]) {
 
-                            if (myObject[i].id != newDislikeList[j]) {
-
-                                topPicks.push(myObject[i])
-                            }
-
+                            topPicks.push(snowboardsByStyle[i])
                         }
 
-                    } else {
+                    }
 
-                        topPicks.push(myObject[i])
+                } else {
+
+                    topPicks.push(snowboardsByStyle[i])
+
+                }
+            }
+
+
+            console.log(topPicks)
+            const result2 = await User.updateOne(
+                { id: ID },
+                {
+                    $set: {
+                        name: newName,
+                        level: newLevel,
+                        ridingStyle: newRidingStyle,
+                        topPicks: topPicks,
+                        hasProfile: true,
+                        address: newAddress,
+                        bodyMeasures: {
+                            weight: newWeight,
+                            height: newHeight,
+                            shoeSize: newShoeSize
+                        }
+
 
                     }
                 }
+            )
 
+            const updatedUser = await User.findOne({ id: ID })
 
-                console.log(topPicks)
-                const result = await User.updateOne(
-                    { id: ID },
-                    {
-                        $set: {
-                            name: newName,
-                            level: newLevel,
-                            ridingStyle: newRidingStyle,
-                            topPicks: topPicks,
-                            hasProfile: true,
-                            address: newAddress,
-                            bodyMeasures: {
-                                weight: newWeight,
-                                height: newHeight,
-                                shoeSize: newShoeSize
-                            }
+            if (result2) {
 
-
-                        }
-                    }
-                )
-
-                const updatedUser = await User.findOne({ id: ID })
-
-                if (result) {
-
-                    res.json(updatedUser)
-                }
-                else res.status(404).send("not found")
-
-
+                res.json(updatedUser)
             }
-        });
+            else res.status(404).send("not found")
+
+        
+        })
+        // request(`${devApi}/getStyle/${newRidingStyle}`, async (error, response, body) => {
+        //     if (error) {
+        //         console.log('error:', error); // Print the error if one occurred
+        //         res.status(404).send("not found")
+        //     }
+        //     if (body) {
+
+        //         snowboardsByStyle = body
+        //         console.log(snowboardsByStyle)
+        //         var myObject = JSON.parse(snowboardsByStyle);
+        //         console.log(myObject)
+
+        //         for (var i = 0; i < myObject.length; i++) {
+        //             if (newDislikeList.length > 0) {
+        //                 for (var j = 0; j < newDislikeList.length; j++) {
+
+        //                     if (myObject[i].id != newDislikeList[j]) {
+
+        //                         topPicks.push(myObject[i])
+        //                     }
+
+        //                 }
+
+        //             } else {
+
+        //                 topPicks.push(myObject[i])
+
+        //             }
+        //         }
+
+
+        //         console.log(topPicks)
+        //         const result = await User.updateOne(
+        //             { id: ID },
+        //             {
+        //                 $set: {
+        //                     name: newName,
+        //                     level: newLevel,
+        //                     ridingStyle: newRidingStyle,
+        //                     topPicks: topPicks,
+        //                     hasProfile: true,
+        //                     address: newAddress,
+        //                     bodyMeasures: {
+        //                         weight: newWeight,
+        //                         height: newHeight,
+        //                         shoeSize: newShoeSize
+        //                     }
+
+
+        //                 }
+        //             }
+        //         )
+
+        //         const updatedUser = await User.findOne({ id: ID })
+
+        //         if (result) {
+
+        //             res.json(updatedUser)
+        //         }
+        //         else res.status(404).send("not found")
+
+
+        //     }
+        // });
 
 
     },
@@ -228,54 +292,127 @@ module.exports = {
         console.log("markUnlikeSnowboard()")
         var ID = req.body.id
         var newRidingStyle = req.body.ridingStyle
+        var userId = req.body.userId
+        var newDislikeList = req.body.dislikeList
+        var idIsInList = false
 
+        console.log(userId)
         var topPicks = [];
-        request(`${devApi2}/getStyle/${newRidingStyle}`, async (error, response, body) => {
-            if (error) {
-                console.log('error:', error); // Print the error if one occurred
-                res.status(404).send("not found")
+
+        for (var j = 0; j < newDislikeList.length; j++) {
+
+            if (ID == newDislikeList[j]) {
+
+                idIsInList = true
+                break;
             }
-            if (body) {
 
-                snowboardsByStyle = body
-                console.log(snowboardsByStyle)
+        }
 
-                var myObject = JSON.parse(snowboardsByStyle);
-                console.log(myObject)
-                for (var i = 0; i < myObject.length; i++) {
-                    console.log(myObject[i])
+        if( !idIsInList ) {
+            
+            snowboardCtl.getSnowboardByStyles(newRidingStyle)
+            .then(async (result) => {
+                snowboardsByStyle = result
+                //         console.log(snowboardsByStyle)
+        
+                //         var myObject = JSON.parse(snowboardsByStyle);
+                //         console.log(myObject)
+    
+                        for (var i = 0; i < snowboardsByStyle.length; i++) {
+                            console.log(snowboardsByStyle[i])
+        
+                            if (snowboardsByStyle[i].id != ID) {
+        
+                                topPicks.push(snowboardsByStyle[i])
+        
+                            }
+        
+                        }
+                        console.log(topPicks)
+                        const result2 = await User.updateOne(
+                            { id: userId },
+                            {
+                                $set: {
+                                    topPicks: topPicks,
+                                },
+        
+                                $push: { dislikeList: ID }
+        
+                            }
+                        )
+        
+                        const updatedUser = await User.findOne({ id: userId })
+        
+                        if (result2) {
+        
+                            res.json(updatedUser)
+                        }
+                        else res.status(404).send("not found")
+        
+        
+                    })
+        } else {
 
-                    if (myObject[i].id != ID) {
+            
+            const updatedUser = await User.findOne({ id: userId })
+        
+            if (updatedUser) {
 
-                        topPicks.push(myObject[i])
-
-                    }
-
-                }
-                console.log(topPicks)
-                const result = await User.updateOne(
-                    { id: ID },
-                    {
-                        $set: {
-                            topPicks: topPicks,
-                        },
-
-                        $push: { dislikeList: ID }
-
-                    }
-                )
-
-                const updatedUser = await User.findOne({ id: ID })
-
-                if (result) {
-
-                    res.json(updatedUser)
-                }
-                else res.status(404).send("not found")
-
-
+                res.json(updatedUser)
             }
-        });
+            else res.status(404).send("not found")
+        }
+
+        
+
+        
+        // request(`${devApi}/getStyle/${newRidingStyle}`, async (error, response, body) => {
+        //     if (error) {
+        //         console.log('error:', error); // Print the error if one occurred
+        //         res.status(404).send("not found")
+        //     }
+        //     if (body) {
+
+        //         snowboardsByStyle = body
+        //         console.log(snowboardsByStyle)
+
+        //         var myObject = JSON.parse(snowboardsByStyle);
+        //         console.log(myObject)
+        //         for (var i = 0; i < myObject.length; i++) {
+        //             console.log(myObject[i])
+
+        //             if (myObject[i].id != ID) {
+
+        //                 topPicks.push(myObject[i])
+
+        //             }
+
+        //         }
+        //         console.log(topPicks)
+        //         const result = await User.updateOne(
+        //             { id: ID },
+        //             {
+        //                 $set: {
+        //                     topPicks: topPicks,
+        //                 },
+
+        //                 $push: { dislikeList: ID }
+
+        //             }
+        //         )
+
+        //         const updatedUser = await User.findOne({ id: ID })
+
+        //         if (result) {
+
+        //             res.json(updatedUser)
+        //         }
+        //         else res.status(404).send("not found")
+
+
+        //     }
+        // });
 
     },
 

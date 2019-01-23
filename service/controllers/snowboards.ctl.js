@@ -19,21 +19,23 @@ const Snowboard = require('../models/snowboard');
 //         .catch(err => console.log(`query error: ${err}`))
 // }
 module.exports= {
-    async getSnowboardByStyles(req, res) {
+    async getSnowboardByStyles(style) {
         console.log("getSnowboardByStyles()")
     
-        console.log (req.params.ridingStyle)
-        result= await Snowboard.find({ ridingStyle: req.params.ridingStyle})
+        // console.log (req.params.ridingStyle)
+        const result= await Snowboard.find({ ridingStyle: style})//////////////////
         
+        return result; 
 
-        if(result) {
-            console.log(result)
-            res.json(result)
-        }
-        else res.status(404).send("not found")
+        // if(result) {
+        //     console.log(result)
+        //     res.json(result)
+        // }
+        // else res.status(404).send("not found")
     },
     
 }
+
 
 
 // newuser = {

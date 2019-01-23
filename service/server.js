@@ -10,7 +10,6 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-// app.use(morgan('dev'))
 app.use(bodyParser.json());
 
 app.set('port',port);
