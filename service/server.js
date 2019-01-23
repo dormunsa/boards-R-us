@@ -2,7 +2,6 @@ const express       = require('express')
 const userCtl       = require('./controllers/users.ctl')
 const gifsCtl       = require('./controllers/gifs.ctl')
 const snowboardCtl  = require('./controllers/snowboards.ctl')
-// const bodyParser    = require('body-parser')
 
 const app = express()
 const port = process.env.PORT || 3000
@@ -10,13 +9,11 @@ app.set('port', port)
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
-// app.use(bodyParser.json())
-// app.use(bodyParser.urlencoded({ extended: true }))
 
 
 /*** All routes ***/
 app.get('/getAllSnowboards'     ,snowboardCtl.getAllSnowboards)
-app.get('/getSnowboardByID/:id'     ,snowboardCtl.getSnowboardByID)
+app.get('/getSnowboardByID/:id' ,snowboardCtl.getSnowboardByID)
 app.post('/addNewSnowboard'     ,snowboardCtl.addNewSnowboard)
 
 app.get('/getAllSignedUsers'    ,userCtl.getAllSignedUsers)

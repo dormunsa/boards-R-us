@@ -79,7 +79,10 @@ module.exports = {
                         topPicksCount++
                     }
                 } 
-                else topPicks.push(docs[i])  
+                else if (topPicksCount < 5) {
+                    topPicks.push(docs[i]) 
+                    topPicksCount++ 
+                }
             }
 
             const result = await User.updateOne(

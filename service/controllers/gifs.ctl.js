@@ -82,7 +82,7 @@ module.exports = {
         });
     },
 
-    // return top 4 GIFs from db.
+    // returns top 4 GIFs from db.
     async getTopGIFs(req, res) {
         console.log("getTopGIFs()")
 
