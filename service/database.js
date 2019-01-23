@@ -1,16 +1,16 @@
-const mongoose = require('mongoose');
-const consts = require('./consts');
+const mongoose = require('mongoose')
+const consts = require('./consts')
 
-const { MLAB_URL, DB_USER, DB_PASS } = consts;
+const { MLAB_URL, DB_USER, DB_PASS } = consts
+
 const options = {
     useNewUrlParser: true, 
     useCreateIndex: true, 
-    user: DB_USER,
-    pass: DB_PASS,
     autoReconnect: true,
-};
+    user: DB_USER,
+    pass: DB_PASS
+}
 
-mongoose
-    .connect(MLAB_URL, options)
+mongoose.connect(MLAB_URL, options)
     .then(() => console.log('connected to DB'))
-    .catch(err => console.log(`connection error: ${err}`));
+    .catch(err => console.log(`connection error: ${err}`))

@@ -1,19 +1,19 @@
 const mongoose = require('mongoose')
 
-const GIFs_schema = new mongoose.Schema({
-    id: { type: Number, index: 1, required: true },
-    userID: { type: Number, required: true },    // Id of the user that upload the specific gif
-    fileSource: { type: String, required: true },
-    date: { type: Date, required: true },
-    rank: { type : Number, required: false},
-    weather: { 
-        temperature: { type: Number,  max: 150, required: true },
-        icon: { type: String, required: true },
-        windSpeed: { type: Number, min: 0, max: 60, required: true }
+const GIF_schema = new mongoose.Schema({
+
+    id: { type: Number, index: 1, min: 300, required: true },
+    userID: { type: Number, required: true },                       // id of the user that uploaded this GIF.
+    fileSource: { type: String, required: true },                   // GIF source brought from third part.
+    date: { type: Date, required: true },                           // date of filming (for weather API).
+    rank: { type : Number, required: false},                        // the system ranks each GIF using weather parameters.
+    weather: {                                                      // info brought from third part weather API.
+        temperature: { type: Number, required: true },
+        icon: { type: String, required: true },                     // rain/snow/sunny etc.
+        windSpeed: { type: Number, min: 0, required: true }
     }
 
 })
 
-
-const GIFs_model = mongoose.model('gifs',GIFs_schema)
-module.exports = GIFs_model
+const GIF_model = mongoose.model('gifs', GIF_schema)
+module.exports = GIF_model

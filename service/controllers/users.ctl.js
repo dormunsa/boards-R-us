@@ -1,86 +1,26 @@
-const mongoose = require('mongoose');
-const User = require('../models/user');
+const User = require('../models/user')
 const snowboardCtl = require('./snowboards.ctl')
-var requestify = require('requestify');
-var request = require('request');
-var snowboardsByStyle
-var devApi = "http://localhost:3000"
-var productionapi = "heroku..."
-var userCount = 17
-
-
-
-// var user_controller_method = {
-
-//    async getAllusers(req, res) {
-//     console.log("get all countries controller method");
-//     const result = await User.find({})
-//     console.log(result);
-//     if(result){
-//         res.json(result)
-//     } else {
-//         res.status(404).send("data not found")
-//     }
-//   },
-//       async AddUserFromGmail(req, res){
-//         console.log("Add new User");
-//         const newUser = new User(req.body);
-//         console.log(req.body)
-//         const result = await newUser.save()
-//         if(result){
-//             res.json(result)
-//         } else {
-//             res.status(404).send("data not found")
-//         }
-
-//       },
-//       async UpdateUser(req, res){
-//         console.log("Update User User");
-//         const newUser = new User(req.body);
-//         console.log(req.body)
-//         // const result = await country.findOneAndUpdate(
-//         //     {id: req.params.id}, 
-//         //      {number_of_competing: req.params.newNumber}
-//         // )
-//         if(result){
-//             res.json(result)
-//         } else {
-//             res.status(404).send("data not found")
-//         }
-
-//       },
-
-//       async GetTopFiveBoards(userDetails){
-//         console.log("inside");
-//         var doc= snowboardCtl.getSnowboardByStyles("Freestyle")
-//         console.log(doc);
-
-//       },
-
-// }
-
-// module.exports = user_controller_method
 
 module.exports = {
 
-    // get all the signed users from db
+    // get all the signed users from db. (users that have entered our system at least once using gmail)
     async getAllSignedUsers(req, res) {
-        console.log("getAllUsers()")
+        console.log("getAllSignedUsers()")
 
-        const result = await User.find({})
+        const docs = await User.find({})
 
-        if (result) res.json(result)
+        if (docs) res.json(docs)
         else res.status(404).send("not found")
     },
 
-    // checks if a specific user is already signed to our system, if yes then return his details.
+    // checks if a specific user is already signed to our system, if true then return his details.
     async checkIfUserIsSigned(req, res) {
         console.log("checkIfUserIsSigned()")
 
-        const ID = req.body.id
-        const result = await User.find({ id: ID })
+        const userID = req.body.id
+        const docs = await User.find({ id: userID })
 
-        if (result) res.json(result)
+        if (docs) res.json(docs)
         else res.status(404).send("not found")
     },
 
@@ -88,65 +28,28 @@ module.exports = {
     async addNewUser(req, res) {
         console.log("addNewUser()")
 
-        const newUser = new User(req.body)
-        newUser.id = userCount + 1;
-        newUser.isSigned = true;
-        console.log(newUser)
+        const newUser = new User(req.body)  
+        newUser.isSigned = true
+
+        var g_usersCount = 200
+        const dbCount = await User.find({}).countDocuments()        // returns the amount of snowboards in the collection
+        g_usersCount += dbCount                                     // generate uniq id 
+        newUser.id = g_usersCount + 1
+
         const result = await newUser.save()
 
         if (result) res.json(newUser)
         else res.status(404).send("not found")
     },
 
-
-    // async updateUserProfile(req, res) {
-
-    //     console.log("updateUserProfile()")
-    //     const ID = req.body.id
-    //     const newLevel = req.body.level
-    //     const newRidingStyle = req.body.ridingStyle
-    //     const newWeight = req.body.weight
-    //     const newHeight = req.body.height
-    //     const newShoeSize = req.body.shoeSize
-
-    //     const result = await User.updateOne(
-    //         {id: ID}, 
-    //         {
-    //             $set: {
-    //                 level: newLevel,
-    //                 ridingStyle: newRidingStyle,
-    //                 bodyMeasures: {
-    //                     weight: newWeight,
-    //                     height: newHeight,
-    //                     shoeSize: newShoeSize
-    //                 }
-
-    //             }
-    //         }
-    //     )
-
-    //     const updatedUser = await User.findOne({id: ID})
-
-    //     if(result) res.json(updatedUser)
-    //     else res.status(404).send("not found")
-    // },
-
-    // get user's top 5 matching boards from db
-    // async GetTopFiveBoards(req, res) {
-    //     console.log("GetTopFiveBoards()")
-
-    //     var doc = snowboardCtl.getSnowboardByStyles("Freestyle")
-    //     if(doc) res.json(doc)
-    //     else res.status(404).send("not found")
-    //   },
-
-
-    // update the profile details of an existing user in db
+    // update the profile details of an existing user
     async updateUserProfile(req, res) {
+        console.log("updateUserProfile()")
 
-        console.log("getByStyle()")
-        var ID = req.body.id
+        // user attributes
+        var userID = req.body.id
         var newName = req.body.name
+        var newGender = req.body.gender
         var newLevel = req.body.level
         var newAddress = req.body.address
         var newRidingStyle = req.body.ridingStyle
@@ -154,268 +57,114 @@ module.exports = {
         var newHeight = req.body.height
         var newShoeSize = req.body.shoeSize
         var newDislikeList = req.body.dislikeList
-        console.log(newDislikeList)
-        var topPicks = [];
 
-        console.log(newRidingStyle)
+        var topPicks = []
+        var topPicksCount = 0
       
-        snowboardCtl.getSnowboardByStyles("Freestyle")
-        .then(async (result) => {
-            console.log(result)
-            snowboardsByStyle = result
-            console.log(snowboardsByStyle)
-            // console.log(snowboardsByStyle)
-            // var myObject = JSON.parse(snowboardsByStyle);
-            // console.log(myObject)
-
-            for (var i = 0; i < snowboardsByStyle.length; i++) {
+        snowboardCtl.getSnowboardByStyleAndGender(newRidingStyle, newGender) // returns all the snowboards belongs to a spesific style.
+        .then(async (docs) => {
+            // creating a top picks list for the user
+            for (var i = 0; i < docs.length; i++) {
                 if (newDislikeList.length > 0) {
+                    var isInList = false
+                    // going thru the disliked snowboards list to make sure we won't put it in the top picks list.
                     for (var j = 0; j < newDislikeList.length; j++) {
-
-                        if (snowboardsByStyle[i].id != newDislikeList[j]) {
-
-                            topPicks.push(snowboardsByStyle[i])
+                        if (docs[i].id == newDislikeList[j]) {
+                            isInList = true // found in dislikes list
+                            break
                         }
-
                     }
-
-                } else {
-
-                    topPicks.push(snowboardsByStyle[i])
-
-                }
+                    if (isInList == false && topPicksCount < 5) {
+                        topPicks.push(docs[i])
+                        topPicksCount++
+                    }
+                } 
+                else topPicks.push(docs[i])  
             }
 
-
-            console.log(topPicks)
-            const result2 = await User.updateOne(
-                { id: ID },
-                {
+            const result = await User.updateOne(
+                { id: userID },
+                { 
                     $set: {
                         name: newName,
-                        level: newLevel,
-                        ridingStyle: newRidingStyle,
-                        topPicks: topPicks,
-                        hasProfile: true,
+                        gender: newGender,
                         address: newAddress,
+                        ridingStyle: newRidingStyle,
+                        level: newLevel,
+                        hasProfile: true,
+                        topPicks: topPicks,
                         bodyMeasures: {
                             weight: newWeight,
                             height: newHeight,
                             shoeSize: newShoeSize
                         }
-
-
                     }
                 }
             )
 
-            const updatedUser = await User.findOne({ id: ID })
+            const updatedUser = await User.findOne({ id: userID })
 
-            if (result2) {
-
-                res.json(updatedUser)
-            }
+            if (result) res.json(updatedUser)
             else res.status(404).send("not found")
-
-        
         })
-        // request(`${devApi}/getStyle/${newRidingStyle}`, async (error, response, body) => {
-        //     if (error) {
-        //         console.log('error:', error); // Print the error if one occurred
-        //         res.status(404).send("not found")
-        //     }
-        //     if (body) {
-
-        //         snowboardsByStyle = body
-        //         console.log(snowboardsByStyle)
-        //         var myObject = JSON.parse(snowboardsByStyle);
-        //         console.log(myObject)
-
-        //         for (var i = 0; i < myObject.length; i++) {
-        //             if (newDislikeList.length > 0) {
-        //                 for (var j = 0; j < newDislikeList.length; j++) {
-
-        //                     if (myObject[i].id != newDislikeList[j]) {
-
-        //                         topPicks.push(myObject[i])
-        //                     }
-
-        //                 }
-
-        //             } else {
-
-        //                 topPicks.push(myObject[i])
-
-        //             }
-        //         }
-
-
-        //         console.log(topPicks)
-        //         const result = await User.updateOne(
-        //             { id: ID },
-        //             {
-        //                 $set: {
-        //                     name: newName,
-        //                     level: newLevel,
-        //                     ridingStyle: newRidingStyle,
-        //                     topPicks: topPicks,
-        //                     hasProfile: true,
-        //                     address: newAddress,
-        //                     bodyMeasures: {
-        //                         weight: newWeight,
-        //                         height: newHeight,
-        //                         shoeSize: newShoeSize
-        //                     }
-
-
-        //                 }
-        //             }
-        //         )
-
-        //         const updatedUser = await User.findOne({ id: ID })
-
-        //         if (result) {
-
-        //             res.json(updatedUser)
-        //         }
-        //         else res.status(404).send("not found")
-
-
-        //     }
-        // });
-
-
     },
 
-    async markUnlikeSnowboard(req, res) {
+    // update the user's dislike list to learn what kind of snowboards he doesn't like and returns a new top list 
+    async markDislikeSnowboard(req, res) {
+        console.log("markDislikeSnowboard()")
 
-        console.log("markUnlikeSnowboard()")
-        var ID = req.body.id
+        var snowboardID = req.body.snowboardID
+        var userID = req.body.userID
+        var userGender = req.body.userGender
         var newRidingStyle = req.body.ridingStyle
-        var userId = req.body.userId
         var newDislikeList = req.body.dislikeList
+
+        var newTopPicks = []
+        var topPicksCount = 0
         var idIsInList = false
 
-        console.log(userId)
-        var topPicks = [];
-
-        for (var j = 0; j < newDislikeList.length; j++) {
-
-            if (ID == newDislikeList[j]) {
-
+        // checks if the snowboard is in dislike list
+        for (var i = 0; i < newDislikeList.length; i++) {
+            if (snowboardID == newDislikeList[i]) {
                 idIsInList = true
                 break;
             }
-
         }
 
-        if( !idIsInList ) {
-            
-            snowboardCtl.getSnowboardByStyles(newRidingStyle)
-            .then(async (result) => {
-                snowboardsByStyle = result
-                //         console.log(snowboardsByStyle)
-        
-                //         var myObject = JSON.parse(snowboardsByStyle);
-                //         console.log(myObject)
-    
-                        for (var i = 0; i < snowboardsByStyle.length; i++) {
-                            console.log(snowboardsByStyle[i])
-        
-                            if (snowboardsByStyle[i].id != ID) {
-        
-                                topPicks.push(snowboardsByStyle[i])
-        
-                            }
-        
-                        }
-                        console.log(topPicks)
-                        const result2 = await User.updateOne(
-                            { id: userId },
-                            {
-                                $set: {
-                                    topPicks: topPicks,
-                                },
-        
-                                $push: { dislikeList: ID }
-        
-                            }
-                        )
-        
-                        const updatedUser = await User.findOne({ id: userId })
-        
-                        if (result2) {
-        
-                            res.json(updatedUser)
-                        }
-                        else res.status(404).send("not found")
-        
-        
-                    })
-        } else {
+        // if the snowboard is not in dislike list
+        if(!idIsInList) {
+            snowboardCtl.getSnowboardByStyleAndGender(newRidingStyle, userGender)
+            .then(async (styleDocs) => {
+                // creating a new top picks list for the user that doesn't contain disliked snowboard
+                for (var i = 0; i < styleDocs.length; i++) {
+                    if (styleDocs[i].id != snowboardID && topPicksCount < 5) {
+                        newTopPicks.push(styleDocs[i])
+                        topPicksCount++
+                    }
+                }
 
-            
-            const updatedUser = await User.findOne({ id: userId })
+                const result = await User.updateOne(
+                    { id: userID },
+                    {
+                        $set: { topPicks: newTopPicks },
+                        $push: { dislikeList: snowboardID }
+                    }
+                )
         
-            if (updatedUser) {
-
-                res.json(updatedUser)
-            }
+                const updatedUser = await User.findOne({ id: userID })
+        
+                if (result) {
+                    res.json(updatedUser)
+                }
+                else res.status(404).send("not found")
+            })
+        } 
+        else {
+            const updatedUser = await User.findOne({id: userID})
+        
+            if (updatedUser) res.json(updatedUser)
             else res.status(404).send("not found")
         }
-
-        
-
-        
-        // request(`${devApi}/getStyle/${newRidingStyle}`, async (error, response, body) => {
-        //     if (error) {
-        //         console.log('error:', error); // Print the error if one occurred
-        //         res.status(404).send("not found")
-        //     }
-        //     if (body) {
-
-        //         snowboardsByStyle = body
-        //         console.log(snowboardsByStyle)
-
-        //         var myObject = JSON.parse(snowboardsByStyle);
-        //         console.log(myObject)
-        //         for (var i = 0; i < myObject.length; i++) {
-        //             console.log(myObject[i])
-
-        //             if (myObject[i].id != ID) {
-
-        //                 topPicks.push(myObject[i])
-
-        //             }
-
-        //         }
-        //         console.log(topPicks)
-        //         const result = await User.updateOne(
-        //             { id: ID },
-        //             {
-        //                 $set: {
-        //                     topPicks: topPicks,
-        //                 },
-
-        //                 $push: { dislikeList: ID }
-
-        //             }
-        //         )
-
-        //         const updatedUser = await User.findOne({ id: ID })
-
-        //         if (result) {
-
-        //             res.json(updatedUser)
-        //         }
-        //         else res.status(404).send("not found")
-
-
-        //     }
-        // });
-
     },
-
-
 
 }
