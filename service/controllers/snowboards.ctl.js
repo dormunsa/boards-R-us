@@ -1,7 +1,5 @@
 const Snowboard = require('../models/snowboard')
 
-var g_snowboardsCount = 100
-
 module.exports = {
 
     // get all the snowboards from db.
@@ -41,6 +39,7 @@ module.exports = {
         console.log("addNewSnowboard()")
 
         const newSnowboard = new Snowboard(req.body)
+        var g_snowboardsCount = 100
         const dbCount = await Snowboard.find({}).countDocuments()       // returns the amount of snowboards in the collection
         g_snowboardsCount += dbCount                                    // generate uniq id 
         newSnowboard.id = g_snowboardsCount + 1
