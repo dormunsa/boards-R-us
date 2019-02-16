@@ -23,6 +23,15 @@ module.exports = {
         if (docs) res.json(docs)
         else res.status(404).send("not found")
     },
+    async getUserByid(req, res) {
+        console.log("checkIfUserIsSigned()")
+
+        const userID = req.params.id
+        const docs = await User.find({ id: userID })
+
+        if (docs) res.json(docs)
+        else res.status(404).send("not found")
+    },
 
     // adds a new user to db after gmail authentication
     async addNewUser(req, res) {

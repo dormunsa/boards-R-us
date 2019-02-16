@@ -2,11 +2,11 @@ const express       = require('express')
 const userCtl       = require('./controllers/users.ctl')
 const gifsCtl       = require('./controllers/gifs.ctl')
 const snowboardCtl  = require('./controllers/snowboards.ctl')
-
+var cors = require('cors');
 const app = express()
 const port = process.env.PORT || 3000
 app.set('port', port)
-
+app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
@@ -14,6 +14,7 @@ app.use(express.urlencoded({ extended: true }))
 /*** All routes ***/
 app.get('/getAllSnowboards'     ,snowboardCtl.getAllSnowboards)
 app.get('/getSnowboardByID/:id' ,snowboardCtl.getSnowboardByID)
+app.get('/getUserID/:id' ,userCtl.getUserByid)
 app.post('/addNewSnowboard'     ,snowboardCtl.addNewSnowboard)
 
 app.get('/getAllSignedUsers'    ,userCtl.getAllSignedUsers)

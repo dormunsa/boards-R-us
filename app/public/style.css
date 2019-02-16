@@ -1,0 +1,106 @@
+nav li a {
+    color: white !important;
+  }
+  .textCenter{
+      text-align: center;
+      margin-top: 15px;
+  }
+  kendo-combobox
+  {
+    width:200PX !important;
+  }
+  .eventList{
+      margin-bottom: 40px;
+  }
+  .textPosition{
+      position: relative;
+      top: 50px;
+      left : 15%;
+  }
+
+  .myButton {
+    margin: 0 auto;
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #000000), color-stop(1, #0a2e52));
+	background:-moz-linear-gradient(top, #000000 5%, #0a2e52 100%);
+	background:-webkit-linear-gradient(top, #000000 5%, #0a2e52 100%);
+	background:-o-linear-gradient(top, #000000 5%, #0a2e52 100%);
+	background:-ms-linear-gradient(top, #000000 5%, #0a2e52 100%);
+	background:linear-gradient(to bottom, #000000 5%, #0a2e52 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#000000', endColorstr='#0a2e52',GradientType=0);
+	background-color:#000000;
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+	border-radius:8px;
+	border:1px solid #84bbf3;
+	display:block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+    padding:15px 24px;
+    position: relative;
+    top: 500px;
+    text-decoration:none;
+    text-align: center;
+    width: 150px;
+}
+.myButton:hover {
+	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #0a2e52), color-stop(1, #000000));
+	background:-moz-linear-gradient(top, #0a2e52 5%, #000000 100%);
+	background:-webkit-linear-gradient(top, #0a2e52 5%, #000000 100%);
+	background:-o-linear-gradient(top, #0a2e52 5%, #000000 100%);
+	background:-ms-linear-gradient(top, #0a2e52 5%, #000000 100%);
+	background:linear-gradient(to bottom, #0a2e52 5%, #000000 100%);
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#0a2e52', endColorstr='#000000',GradientType=0);
+	background-color:#0a2e52;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+  nav button {
+    font-size: 15px !important;
+    padding: 1px !important;
+    width: 100px !important;
+    color: white !important;
+  }
+  @media only screen and (max-width : 430px){
+    .left-align{
+        margin-left: 0px;
+    }
+    form[_ngcontent-c1]{
+      margin-left: 0px !important;
+    }
+    .hide{
+      display: none;
+    }
+    .mob-left{
+     text-align: left;
+     padding-left: 0px;
+    }
+    .align-left{
+      padding-left: 0px !important;
+      padding-right: 0px !important;
+    }
+    ::ng-deep kendo-combobox[_ngcontent-c0] {
+      width: 138px !important;
+      margin-left: 10px;
+  }
+  /* ::ng-deep .k-combobox-clearable .k-input {
+    padding-right: calc(16px + 1rem);
+    width: 70px;
+  } */
+  
+  ::ng-deep .form-check-label[_ngcontent-c4] {
+   font-size: 14px;
+  }
+  ::ng-deep .k-datepicker[_ngcontent-c4][_ngcontent-c4] {
+    width: 14.3em !important;
+    z-index: 99;
+  }
+  .bg-light {
+    background-color: #000000!important;
+}
+  }
+  
