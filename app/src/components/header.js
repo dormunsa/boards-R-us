@@ -10,17 +10,18 @@ class Header extends Component {
     }
     NotActive = {
         color: "white",
-        fontWeight: "regular",
+        fontWeight: "lighter",
         textDecoration: "none",
     }
     header = {
-        backgroundColor: "#000000",
-        
+        backgroundColor: "black",
+        height : "100px",
     }
     logo = {
-        width: "50px",
-        height : "50px",
-        fontWeight : "bold"
+        width: "70px",
+        height : "90px",
+        marginRight: 10,
+        marginLeft: 20
     }
    
     render() {
@@ -34,7 +35,7 @@ class Header extends Component {
   </button>
 
   <div className="collapse navbar-collapse" id="navbarSupportedContent1">
-    <ul className="navbar-nav mr-auto">
+    <ul style={this.navLinks} className="navbar-nav mr-auto">
       <li className="nav-item active">
         <a className="nav-link" href="#">
           <i className="fas fa-chart-line"></i>
@@ -75,12 +76,12 @@ class Header extends Component {
   
   </div>
 
-  <form className="form-inline my-2 my-lg-0">
+  {/* <form className="form-inline my-2 my-lg-0">
   <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
     </form>
     <a className="nav-link  mob-left"  title="Cart">
     <i className="fas fa-lock"></i>
-    </a>
+    </a> */}
 </nav>
         )
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Gmail from './components/gmailLogin.js';
+import Gmail from './components/homePage';
 
 
 

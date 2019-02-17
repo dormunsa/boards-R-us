@@ -19,8 +19,9 @@ class SnowBoardList extends Component {
         var self=this
         const url = 'https://boards-r-us-mm.herokuapp.com/checkIfUserIsSigned'
         const prox = 'https://cors-anywhere.herokuapp.com/'
-        const dev = 'http://localhost:3000/getUserID/'
-        fetch(`${dev}${this.state.User.id}`)
+        const dev = 'http://localhost:3000/getUserID/202'
+        // ${this.state.User.id}
+        fetch(`${dev}`)
         .then(response => {
            
           if (response.ok) {
@@ -81,12 +82,8 @@ class SnowBoardList extends Component {
                  <h5 className = "card-title">{item.name}</h5>
                     <img style={this.logo} src = {item.imageSource} />
                     <h6 className = "card-title">{item.ridingStyle}</h6>
-
-                   
-
                 </div>
-                    
-                    
+ 
                 </SnowBoard>
             </div>
         </div>
@@ -94,23 +91,40 @@ class SnowBoardList extends Component {
     }
 
     render() {
-        
-        return( 
-            <div className="eventList">
-                <div className = "textCenter">
-                <h2 className = "card-title" style = {{marginBottom : "40px"}}>SNOWBOARDS</h2>
-                    
+        // if(this.state.User.hasProfile){
+            return( 
+                <div className="eventList">
+                    <div className="textCenter">
+                    <h2 className="card-title snowboardsTitle">SNOWBOARDS</h2>
+                    <p className="topPickText">our top pick for you.</p>
+                        
+                    </div>
+                        <div className = "container">
+                        <div className = "row">
+                            { this.state.boards.map(this.eachEvent)}
+                        </div>
+                    </div>
+                   
                 </div>
-                <div className = "container">
-                 <div className = "row">
-                 { this.state.boards.map(this.eachEvent)}
-                 </div>
-                </div>
-               
-            </div>
-        )
-    }
+            )
+        // } else {
+        //     return( 
+        //         <div className="eventList">
+        //             <div className = "textCenter">
+        //             <h2 className = "card-title" style = {{marginBottom : "40px"}}>SNOWBOARDS</h2>
+                        
+        //             </div>
+        //             <div className = "container">
+        //              <div className = "row">
+        //              <a style = {{top: "0px"}} className="myButton">Get Start Now</a>
+        //              </div>
+        //             </div>
+                   
+        //         </div>
+        //     )
 
+        // }
+    }
 }
 
 

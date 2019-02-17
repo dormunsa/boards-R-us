@@ -82,38 +82,24 @@ class GifsList extends Component {
       
      console.log(item)
         return(
-            <div className = "col-12 col-lg-4 card"  key = {`container${i}`} style={{width: '18rem', marginBottom: '7px'}}>
-            <div className = "card-body">
-                <Gif key = {`event${i}`}  gif = {item}>
-                 <div>
-                
+            <div className = "col-12 col-lg-4 card card-body gifBox"  key = {`container${i}`}>
+                <Gif key={`event${i}`} gif={item}>
                     <img style={this.logo} src = {item.source} />
-                 
-                   
-
-                </div>
-                    
-                    
                 </Gif>
             </div>
-        </div>
         )
     }
 
-    render() {
-        
+    render() {    
         return( 
             <div className="eventList">
-                <div className = "textCenter">
-                <h2 className = "card-title" style = {{marginBottom : "40px"}}>FEATURES</h2>
-                    
-                </div>
+                <h2 className="card-title featuresTitle">FEATURES</h2>   
+
                 <div className = "container">
-                 <div className = "row">
-                 { this.state.Gifs.map(this.eachEvent)}
-                 </div>
-                </div>
-               
+                    <div className = "row">
+                        {this.state.Gifs.map(this.eachEvent)}
+                    </div>
+                </div> 
             </div>
         )
     }

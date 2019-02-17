@@ -10,7 +10,7 @@ import Gmail from './gmailLogin.js'
 class HomePage extends Component {
 
     constructor(props) {
-    
+    debugger;
         super(props)
         this.state = { User : props.user }
         document.getElementById("body-bg").style.backgroundColor = "white"

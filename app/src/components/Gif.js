@@ -2,27 +2,16 @@ import React, { Component } from 'react';
 
 class Gif extends Component {
 
-    constructor(props) {
-       
+    constructor(props) {    
         super(props)
-        this.state = { gif : props.gif }
-        this.markDisLike = this.markDisLike.bind(this)
-      
-
-    
-    }
-
-    markDisLike(event){
-        
-        console.log (this.state.board)
-
+        this.state = { gif : props.gif } 
     }
 
     render() {
         const self = this;
         return(
-            <div onClick = {self.markDisLike}  className="event">
-                <div>{this.props.children}</div>
+            <div>
+                {this.props.children}
             </div>
         )
     }
