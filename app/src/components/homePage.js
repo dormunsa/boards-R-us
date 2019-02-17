@@ -5,8 +5,19 @@ import SnowBoardList from './snowBoardList.js'
 import AboutUs from './aboutUs.js'
 import GifsList from './GifsList.js'
 import Footer from './footer.js'
+import Gmail from './gmailLogin.js'
 
 class HomePage extends Component {
+
+    constructor(props) {
+    
+        super(props)
+        this.state = { User : props.user }
+        document.getElementById("body-bg").style.backgroundColor = "white"
+      
+
+    
+    }
     active = {
         color: "#4248FF",
         fontWeight: "bold",
@@ -28,13 +39,16 @@ class HomePage extends Component {
     }
    
     render() {
+        var self=this
         return(
+
+           
                 <div>
-                    <Header>
+                    <Header user = {self.state.User}>
                     </Header>
-                    <Section1>
+                    <Section1 >
                     </Section1>
-                    <SnowBoardList>
+                    <SnowBoardList user = {self.state.User}>
                         </SnowBoardList>
                         <AboutUs>
                         </AboutUs>

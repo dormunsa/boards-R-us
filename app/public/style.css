@@ -1,10 +1,23 @@
 nav li a {
     color: white !important;
   }
+ 
   .textCenter{
       text-align: center;
       margin-top: 15px;
   }
+  .logo{
+    width: 400px;
+    height : 400px;
+    display : block;
+    margin : 0 auto;
+    position: relative;
+    left : 20px;
+  }
+   .white {
+     color: #ffffff !important;
+     text-align: center;
+   }
   kendo-combobox
   {
     width:200PX !important;
@@ -17,7 +30,37 @@ nav li a {
       top: 50px;
       left : 15%;
   }
-
+  .top-space{
+    margin-top: 20px;
+  }
+  .butt1 {
+    border: 0px;
+    margin: 0 auto;
+    background-color:#fa0808;
+    -moz-border-radius:15px;
+    -webkit-border-radius:15px;
+    border-radius:15px;
+    display: block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:19px;
+    padding:12px 37px;
+    text-decoration:none;
+    position: relative;
+    top: 150px;
+    text-decoration:none;
+    text-align: center;
+    width: 230px;
+  }
+  .butt1:hover {
+    background-color:#ffffff;
+    color : #fa0808;
+  }
+  .background{
+    background-color: #000000;
+  }
+  
   .myButton {
     margin: 0 auto;
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #000000), color-stop(1, #0a2e52));

@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import HomePage from './components/homePage.js';
+import Gmail from './components/gmailLogin.js';
+
 
 
 import App from './App';
@@ -14,7 +15,8 @@ import * as serviceWorker from './serviceWorker';
 // Learn more about service workers: http://bit.ly/CRA-PWA
 
 ReactDOM.render(
-    <HomePage>
-    </HomePage>, document.getElementById('root')
+    <Gmail>
+       
+    </Gmail>, document.getElementById('root')
 )
 serviceWorker.unregister();

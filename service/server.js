@@ -14,9 +14,10 @@ app.use(express.urlencoded({ extended: true }))
 /*** All routes ***/
 app.get('/getAllSnowboards'     ,snowboardCtl.getAllSnowboards)
 app.get('/getSnowboardByID/:id' ,snowboardCtl.getSnowboardByID)
-app.get('/getUserID/:id' ,userCtl.getUserByid)
 app.post('/addNewSnowboard'     ,snowboardCtl.addNewSnowboard)
 
+app.get('/getUserID/:id' ,userCtl.getUserByid)
+app.get('/getUserByEmail/:email' ,userCtl.getUserByEmail)
 app.get('/getAllSignedUsers'    ,userCtl.getAllSignedUsers)
 app.get('/checkIfUserIsSigned'  ,userCtl.checkIfUserIsSigned)
 app.post('/addNewUser'          ,userCtl.addNewUser)

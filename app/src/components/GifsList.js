@@ -79,7 +79,7 @@ class GifsList extends Component {
 
   
     eachEvent(item, i) {
-        debugger
+      
      console.log(item)
         return(
             <div className = "col-12 col-lg-4 card"  key = {`container${i}`} style={{width: '18rem', marginBottom: '7px'}}>

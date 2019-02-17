@@ -32,6 +32,15 @@ module.exports = {
         if (docs) res.json(docs)
         else res.status(404).send("not found")
     },
+    async getUserByEmail(req, res) {
+        console.log("get user by email()")
+
+        const userEmail = req.params.email
+        const docs = await User.find({ email: userEmail })
+
+        if (docs) res.json(docs)
+        else res.status(404).send("not found")
+    },
 
     // adds a new user to db after gmail authentication
     async addNewUser(req, res) {

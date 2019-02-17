@@ -25,7 +25,7 @@ class Header extends Component {
    
     render() {
         return(
-<nav  style={this.header}  id="main_nav" className="navbar navbar-expand-lg navbar-light bg-dark">
+<nav  style={this.header}  id="main_nav" className="navbar navbar-expand-lg navbar-light ">
   <a className="navbar-brand" href = "#">
     <img style={this.logo} src="assets/logo.png" />
   </a>

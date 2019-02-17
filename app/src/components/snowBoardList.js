@@ -6,7 +6,7 @@ class SnowBoardList extends Component {
 
     constructor(props) {
         super(props)
-        this.state = { boards: [] }
+        this.state = { User:props.user, boards: [] }
         this.topPicks = [];
         
         this.eachEvent = this.eachEvent.bind(this)
@@ -19,8 +19,8 @@ class SnowBoardList extends Component {
         var self=this
         const url = 'https://boards-r-us-mm.herokuapp.com/checkIfUserIsSigned'
         const prox = 'https://cors-anywhere.herokuapp.com/'
-        const dev = 'http://localhost:3000/getUserID/202'
-        fetch(`${dev}`)
+        const dev = 'http://localhost:3000/getUserID/'
+        fetch(`${dev}${this.state.User.id}`)
         .then(response => {
            
           if (response.ok) {
