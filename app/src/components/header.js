@@ -48,37 +48,31 @@ class Header extends Component {
           <ul style={this.navLinks} className="navbar-nav mr-auto">
             <li className="nav-item active">
               <a className="nav-link" href="#">
-                <i className="fas fa-chart-line"></i>
               SHOP
               </a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">
-                <i className="far fa-clipboard"></i>
                 TEAM
               </a>
             </li>
             <li  className="nav-item" >
               <a className="nav-link" href="#">
-                <i className="fas fa-chart-pie"></i>
                 EVENTS
               </a>
             </li>
             <li className="nav-item" >
               <a className="nav-link" href="#" >
-                <i className="fas fa-cog"></i>
                 EXPIRIENCE
               </a>
             </li>
             <li className="nav-item" >
               <a className="nav-link" href="#">
-                <i className="fas fa-exclamation-triangle" ></i>
                 COMPANY
               </a>
             </li>
             <li className="nav-item" >
               <a className="nav-link" href="#" >
-                <i className="fas fa-project-diagram"></i>
                 <span className='align-nav'> CONTACT </span>
               </a>
             </li>
