@@ -3,6 +3,34 @@ import Section1 from './section1.js';
 
 
 class Header extends Component {
+  constructor(props) {
+    debugger
+    super(props)
+    if (props.user) {
+        this.state = {
+            hasProfile: props.user.hasProfile,
+            name: props.user.name,
+            id: props.user.id,
+            address: "",
+            gender: "",
+            level: "",
+            ridingStyle: "",
+            weight: 0,
+            height: 0,
+            shoeSize: 0,
+            dislikeList: props.user.dislikeList,
+            open: false, boards: []
+        }
+    } else {
+        this.state = {
+            
+           name : ""
+        }
+    }
+
+    
+
+}
 
   render() {
     return(
@@ -60,7 +88,7 @@ class Header extends Component {
 
         <div className="icon">
           <img className="userIcon" src="assets/userIcon_white.png" />
-          <h6 className="userIconText">Hi, Miki Makmel</h6>
+          <h6 className="userIconText">Hi, {this.state.name}</h6>
         </div>
 
       </nav>

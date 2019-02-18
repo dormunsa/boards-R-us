@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Gmail from './components/homePage';
-
+import Gmail from './components/gmailLogin.js';
+import 'font-awesome/css/font-awesome.min.css';
 
 
 import App from './App';

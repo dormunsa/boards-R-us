@@ -10,9 +10,15 @@ import Gmail from './gmailLogin.js'
 class HomePage extends Component {
 
     constructor(props) {
-    debugger;
+        debugger
         super(props)
-        this.state = { User : props.user }
+        if(props.user) {
+            this.state = { User: props.user , isLogin : false , open: true }
+        }
+        else{
+            this.state = { user:{}, isLogin : false , open: true }
+        }
+       
         document.getElementById("body-bg").style.backgroundColor = "white"
       
 
@@ -38,11 +44,14 @@ class HomePage extends Component {
         fontWeight : "bold"
     }
    
+    
+   
     render() {
-        var self=this
-        return(
 
-           
+     
+        var self=this
+       
+            return(
                 <div>
                     <Header user = {self.state.User}>
                     </Header>
@@ -57,9 +66,15 @@ class HomePage extends Component {
                         <Footer>
                         </Footer>
                 </div>
-                
-        )
+         )
+       
+            
+            
+       
+        
     }
+
+
 }
 
 export default HomePage

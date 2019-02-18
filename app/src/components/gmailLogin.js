@@ -1,19 +1,36 @@
-import React, {Component} from 'react'
-import ReactDOM from 'react-dom';
-import GoogleLogin from 'react-google-login';
-import HomePage from './homePage.js'
+import React, { Component } from 'react'
+import Header from './header'
+import Section1 from './section1.js'
+import SnowBoardList from './snowBoardList.js'
+import AboutUs from './aboutUs.js'
+import GifsList from './GifsList.js'
+import Footer from './footer.js'
 
+import Modal from 'react-responsive-modal';
+import HomePage from './homePage.js';
+import GoogleLogin from 'react-google-login';
 
 class Gmail extends Component {
-   
+
     constructor(props) {
+        debugger
         super(props)
         this.CheckUser = this.CheckUser.bind(this)
         this.addUser = this.addUser.bind(this)
-        this.state = { User: {} , redirect : false }
-        document.getElementById("body-bg").style.backgroundColor = "black"
+        this.state = { User: {} , isLogin : false , open: true }
+        document.getElementById("body-bg").style.backgroundColor = "white"
+      
 
+    
     }
+    onOpenModal = () => {
+
+        this.setState({ open: true });
+    };
+
+    onCloseModal = () => {
+        this.setState({ open: false });
+    };
 
     CheckUser(response){
 
@@ -41,7 +58,7 @@ class Gmail extends Component {
             else {
                 this.setState(prevSate => ({
                     User: data[0],
-                    redirect : true
+                    isLogin : true
                 }))
             }
            
@@ -77,7 +94,7 @@ class Gmail extends Component {
                 if(json.name != undefined){
                     this.setState(prevSate => ({
                         User: json,
-                        redirect : true
+                        isLogin : true
                     }))
                     }
                 
@@ -91,30 +108,61 @@ class Gmail extends Component {
     }
    
 
-    
-    
-
+    active = {
+        color: "#4248FF",
+        fontWeight: "bold",
+        textDecoration: "none",
+    }
+    NotActive = {
+        color: "white",
+        fontWeight: "regular",
+        textDecoration: "none",
+    }
+    header = {
+        backgroundColor: "#000000",
+        marginBottom: '20px'
+    }
+    logo = {
+        width: "50px",
+        height : "50px",
+        fontWeight : "bold"
+    }
+   
     render() {
+
+        
+        const responseGoogle = (response) => {
+            console.log(response);
+            self.CheckUser(response)
+        }
         var self=this
-       const responseGoogle = (response) => {
-            debugger
-           console.log(response);
-           self.CheckUser(response)
-         }
-         if(this.state.redirect){
-            return (
-                <HomePage  user = {self.state.User}>
-                    </HomePage>
-            )
-
-         } else {
+        if(self.state.isLogin == true){
             return(
-            <div className = "background">
-
-             <h2 className = "card-title white top-space" style = {{marginBottom : "40px"}}>WELCOME TO</h2>
-              <img className = "logo" src="assets/logo.png" />
-              <h2 className = "card-title white" style = {{marginBottom : "40px"}}>SNOWBOARDS</h2>
-                <GoogleLogin
+                <div>
+                  
+                    <HomePage user = {self.state.User} >
+                    </HomePage>
+                   
+                </div>
+         )
+        } else { 
+            const { open } = this.state;
+            const { closeOnEsc } = false
+            return (
+            <div>
+                <Header >
+                </Header>
+                <Section1 >
+                </Section1>
+                <SnowBoardList>
+                </SnowBoardList>
+                <Modal closeOnEsc = {closeOnEsc} open={open}  center>
+                   <div className = "container">
+                        <div className = "row">
+                            <h2> 
+                                Welcome To Boards R US Please Login With Gmail
+                            </h2>
+                            <GoogleLogin
                 clientId="714828973797-3630gtl4t8bs231bdmj8ke3h9clu8ua3.apps.googleusercontent.com"
                 render={renderProps => (
                 <button className = "butt1" onClick={renderProps.onClick}> Login With Gmail</button>
@@ -123,11 +171,20 @@ class Gmail extends Component {
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
                 />
-               
-
+                        </div>
+                    </div>
+                </Modal>
+                <AboutUs>
+                </AboutUs>
+                <GifsList>
+                </GifsList>
+                <Footer>
+                </Footer>
             </div>
-            )
-         }
+        )
+            
+            
+        }
         
     }
 }
