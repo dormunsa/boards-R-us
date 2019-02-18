@@ -2,20 +2,14 @@ import React, { Component } from 'react';
 
 class SnowBoard extends Component {
 
-    constructor(props) {
-       
+    constructor(props) {    
         super(props)
         this.state = { board : props.board }
         this.markDisLike = this.markDisLike.bind(this)
-      
-
-    
     }
 
-    markDisLike(event){
-        
+    markDisLike(event){ 
         console.log (this.state.board)
-
     }
 
     render() {

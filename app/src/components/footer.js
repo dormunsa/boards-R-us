@@ -3,8 +3,8 @@ class Footer extends Component {
    
     backImage = {
         width: "100%",
-        height: "500px",
-        backgroundColor: "#000"
+        height: "50px",
+        backgroundColor: "black"
     }
    
     render() {
@@ -12,7 +12,6 @@ class Footer extends Component {
 
             <div style = {this.backImage}> 
                
-
             </div>
 
         )

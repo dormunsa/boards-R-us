@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import SnowBoard from './snowBoard'
-// 
+import Slider from 'react-slick'
+// import 'slick-carousel/slick/slick-theme.css'
+// import 'slick-carousel/slick/slick.css'
 
 class SnowBoardList extends Component {
 
@@ -75,36 +77,46 @@ class SnowBoardList extends Component {
     eachEvent(item, i) {
        
         return(
-            <div className = "col-12 col-lg-4 card"  key = {`container${i}`} style={{width: '18rem', marginBottom: '7px'}}>
-            <div className = "card-body">
+            // <div className = "col-12 col-lg-4 card"  key = {`container${i}`} style={{width: '18rem', marginBottom: '7px'}}>
+            // <div className = "card-body">
+            // <div className="snowboardContainer">
                 <SnowBoard key = {`event${i}`}  board = {item}>
-                 <div className = "textCenter" >
-                 <h5 className = "card-title">{item.name}</h5>
-                    <img style={this.logo} src = {item.imageSource} />
-                    <h6 className = "card-title">{item.ridingStyle}</h6>
-                </div>
- 
+                    {/* <div className = "textCenter" > */}
+                    {/* <h5 className = "card-title">{item.name}</h5> */}
+
+                    <img className="snowboardImage" src={item.imageSource} />
+                        {/* <h6 className = "card-title">{item.ridingStyle}</h6> */}
+                    {/* </div> */}
                 </SnowBoard>
-            </div>
-        </div>
+            // </div>
+        // </div>
         )
     }
 
     render() {
         // if(this.state.User.hasProfile){
+            const settings = {
+                className: "center",
+                centerMode: true,
+                infinite: true,
+                centerPadding: "60px",
+                slidesToShow: 3,
+                speed: 500
+            }
+
             return( 
                 <div className="eventList">
-                    <div className="textCenter">
                     <h2 className="card-title snowboardsTitle">SNOWBOARDS</h2>
-                    <p className="topPickText">our top pick for you.</p>
-                        
-                    </div>
-                        <div className = "container">
-                        <div className = "row">
-                            { this.state.boards.map(this.eachEvent)}
-                        </div>
-                    </div>
-                   
+                    <p className="topPickText">our top pick for you.</p>  
+
+                    <Slider {...settings}>
+                        {this.state.boards.map(this.eachEvent)}
+                    </Slider>
+                        {/* <div className = "container">
+                            <div className = "row">
+                                {this.state.boards.map(this.eachEvent)}
+                            </div>
+                        </div> */}
                 </div>
             )
         // } else {
@@ -126,6 +138,5 @@ class SnowBoardList extends Component {
         // }
     }
 }
-
 
 export default SnowBoardList

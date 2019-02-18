@@ -5,7 +5,7 @@ class AboutUs extends Component {
     backImage = {
         width: "100%",
         height: "954px",
-        backgroundImage: "url(assets/darkPic.jpg)",
+        backgroundImage: "url(assets/section2.png)",
         backgroundRepeat: "no-repeat",
         backgroundSize: 'cover'
     }

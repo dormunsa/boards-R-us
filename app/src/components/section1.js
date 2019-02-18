@@ -13,7 +13,7 @@ class Section1 extends Component {
         return(
             <div style = {this.backImage}> 
                 <h1 className="mainText">RUN OVER<br/>EVERYTHING</h1>
-                <a href="#" className="myButton">Get Details</a>
+                {/* <a href="#" className="myButton">Get Details</a> */}
             </div>
         )
     }
