@@ -101,12 +101,14 @@ class SnowBoardList extends Component {
                 infinite: true,
                 centerPadding: "60px",
                 slidesToShow: 3,
-                speed: 500
+                speed: 600,
+                // autoplay: true,
+                // autoplaySpeed: 3000,
             }
 
             return( 
                 <div className="eventList">
-                    <h2 className="card-title snowboardsTitle">SNOWBOARDS</h2>
+                    <h2 className="snowboardsTitle">SNOWBOARDS</h2>
                     <p className="topPickText">our top pick for you.</p>  
 
                     <Slider {...settings}>

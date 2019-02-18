@@ -17,15 +17,15 @@ h3 {
   line-height: 100px;
   text-align: center;
 }
-.center .slick-center h3 {
+/* .center .slick-center {
   color: #e67e22;
   opacity: 1;
   transform: scale(1.08);
 }
-.center h3{
-  opacity: 0.8;
+.center {
+  opacity: 0.5;
   transition: all 300ms ease;
-}
+} */
 .content {
   padding: 20px;
   margin: auto;
@@ -95,7 +95,7 @@ h3 {
 .slick-vertical .slick-slide {
   height: 180px;
 }
-.slick-arrow {
+/* .slick-arrow {
   background-color: grey;
 }
 .slick-arrow:hover {
@@ -103,15 +103,59 @@ h3 {
 }
 .slick-arrow:focus {
   background-color: grey;
-}
+} */
 .button {
-  /* background-color: #00558B;
+  background-color: #00558B;
   padding: 10px 20px;
   margin: 0px 20px;
   border: none;
   color: white;
   font-size: 20px;
   border-radius: 5px;
-  min-height: 45px; */
-  background-image: url("assets/arrow.png") !important;
+  min-height: 45px;
+}
+
+
+
+
+/* html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+} */
+
+/* * {
+  box-sizing: border-box !important;
+} */
+
+/* .slider {
+    width: 50% !important;
+    margin: 100px auto !important;
+} */
+
+/* .slick-slide {
+  margin: 0px 20px !important;
+} */
+
+/* .slick-slide img {
+  width: 100% !important;
+} */
+
+/* .slick-prev:before,
+.slick-next:before {
+  color: black !important;
+} */
+
+.slick-slide {
+  transition: all ease-in-out .4s !important;
+  opacity: .1 !important;
+}
+
+.slick-active {
+  opacity: .5 !important;
+  transform: scale(0.85);
+}
+
+.slick-current {
+  opacity: 1 !important;
+  transform: scale(1.0) !important;
 }

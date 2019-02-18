@@ -16,7 +16,7 @@ class SnowBoard extends Component {
         const self = this;
         return(
             <div onClick = {self.markDisLike}  className="event">
-                <div>{this.props.children}</div>
+                {this.props.children}
             </div>
         )
     }
