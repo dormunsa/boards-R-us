@@ -23,7 +23,7 @@ class Section1 extends Component {
         return(
             <div className = "hide_mobile" style = {this.backImage}> 
                 <h1 className="mainText hide_mobile">RUN OVER<br/>EVERYTHING</h1>
-                {/* <a href="#" className="myButton">Get Details</a> */}
+                <button href="#" className="seeDetailsButton">SEE DETAILS</button>
             </div>
         )
     }

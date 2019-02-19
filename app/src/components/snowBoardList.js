@@ -267,8 +267,8 @@ class SnowBoardList extends Component {
                 centerPadding: "60px",
                 slidesToShow: 3,
                 speed: 600,
-                // autoplay: true,
-                // autoplaySpeed: 3000,
+                autoplay: true,
+                autoplaySpeed: 3000,
                 
               }
             

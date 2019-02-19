@@ -48,14 +48,52 @@
     background-image: url("assets/humb.png") !important;
   }
 
-
+  .footerText {
+    color: whitesmoke;
+    opacity: 0.8;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 16px;
+    /* font-weight: 700; */
+    padding-top: 15px;
+    text-align: center;
+  }
+  /* .section1Container {
+    border: 0px solid;
+    max-width: 640px;
+    padding-left: 50px;
+    padding-right: 50px;
+    margin: auto;
+    display: block;
+    overflow-x: hidden;
+  } */
   .mainText {
     color: whitesmoke;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 72px;
     font-weight: 700;
-    padding-top: 185px;
+    padding-top: 175px;
     padding-left: 415px;
+  }
+  .seeDetailsButton {
+    opacity: 0.9;
+    background-color: #010101;
+    border: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: bold;
+    color: whitesmoke;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-left: 722px;
+    margin-top: 25px;
+    cursor: pointer;
+    outline: none !important;
+  }
+  .seeDetailsButton:hover {
+    transform: scale(1.02);
+    opacity: 1;
   }
   .textCenter{
       text-align: center;
@@ -89,16 +127,16 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 56px;
     font-weight: bold;
-    padding-top: 247px;
-    padding-left: 215px;
+    padding-top: 200px;
+    padding-left: 170px;
   }
   .aboutUsParagraph {
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 16px;
-    font-weight: normal;
+    font-weight: 500;
     padding-top: 80px;
-    padding-left: 215px;
+    padding-left: 170px;
   }
   .snowboardsTitle {
     color: black;

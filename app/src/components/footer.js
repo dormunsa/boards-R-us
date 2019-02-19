@@ -11,7 +11,7 @@ class Footer extends Component {
         return(
 
             <div style = {this.backImage}> 
-               
+               <h6 className="footerText">&copy; 2019 Boards R Us by Miki Makmel & Dor Munsa</h6>
             </div>
 
         )
