@@ -107,11 +107,10 @@ class SnowBoardList extends Component {
         newUser.dislikeList = self.state.dislikeList;
         newUser.ridingStyle = self.state.ridingStyle;
         newUser = JSON.stringify(newUser)
-        const url = 'https://boards-r-us-mm.herokuapp.com/checkIfUserIsSigned'
-        const prox = 'https://cors-anywhere.herokuapp.com/'
-        const dev = 'http://localhost:3000/updateUserProfile'
+       
+        const url = 'https://boards-r-us-mm.herokuapp.com/updateUserProfile'
 
-        fetch(`${dev}`, {
+        fetch(`${url}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -152,12 +151,10 @@ class SnowBoardList extends Component {
     getUserByMail() {
         debugger
         var self = this
-        const url = 'https://boards-r-us-mm.herokuapp.com/checkIfUserIsSigned'
-        const prox = 'https://cors-anywhere.herokuapp.com/'
-        const dev = 'http://localhost:3000/getUserID/'
+        const url = 'https://boards-r-us-mm.herokuapp.com/getUserID/'
         // ${this.state.User.id}
         if (this.props.user) {
-            fetch(`${dev}${this.state.id}`)
+            fetch(`${url}${this.state.id}`)
                 .then(response => {
 
                     if (response.ok) {
@@ -244,11 +241,10 @@ class SnowBoardList extends Component {
         reqBody.dislikeList = self.state.User.dislikeList;
         reqBody = JSON.stringify(reqBody)
 
-        const url = 'https://boards-r-us-mm.herokuapp.com/checkIfUserIsSigned'
-        const prox = 'https://cors-anywhere.herokuapp.com/'
-        const dev = 'http://localhost:3000/markDislikeSnowboard'
+      
+        const url = 'https://boards-r-us-mm.herokuapp.com/markDislikeSnowboard'
 
-        fetch(`${dev}`, {
+        fetch(`${url}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

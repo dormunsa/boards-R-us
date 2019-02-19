@@ -27,10 +27,8 @@ class GifsList extends Component {
 
     getTopGIFS( isOpen ){
         var self = this
-        const url = 'https://boards-r-us-mm.herokuapp.com/checkIfUserIsSigned'
-        const prox = 'https://cors-anywhere.herokuapp.com/'
-        const dev = 'http://localhost:3000/getTopGIFs'
-        fetch(`${dev}`)
+        const url = 'https://boards-r-us-mm.herokuapp.com/getTopGIFs'
+        fetch(`${url}`)
         .then(response => {
            
           if (response.ok) {
@@ -114,10 +112,8 @@ class GifsList extends Component {
         newGif.date = self.state.date;
         newGif.fileSource = self.state.fileSource;
         newGif = JSON.stringify(newGif)
-        const url = 'https://boards-r-us-mm.herokuapp.com/checkIfUserIsSigned'
-        const prox = 'https://cors-anywhere.herokuapp.com/'
-        const dev = 'http://localhost:3000/addNewGIF'
-        fetch(`${dev}`, {
+        const url = 'https://boards-r-us-mm.herokuapp.com/addNewGIF'
+        fetch(`${url}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

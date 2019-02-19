@@ -26,12 +26,10 @@ class Gif extends Component {
     getUserByid(){
        
         var self = this
-        const url = 'https://boards-r-us-mm.herokuapp.com/checkIfUserIsSigned'
-        const prox = 'https://cors-anywhere.herokuapp.com/'
-        const dev = 'http://localhost:3000/getUserID/'
+        const url = 'https://boards-r-us-mm.herokuapp.com/getUserID/'
         // ${this.state.User.id}
       
-            fetch(`${dev}${this.state.userid}`)
+            fetch(`${url}${this.state.userid}`)
             .then(response => {
                
                 if (response.ok) {

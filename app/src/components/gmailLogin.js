@@ -37,10 +37,8 @@ class Gmail extends Component {
         var self=this
         const userEmail = response.w3.U3;
         var userName = response.w3.ig
-        const url = 'https://boards-r-us-mm.herokuapp.com/checkIfUserIsSigned'
-        const prox = 'https://cors-anywhere.herokuapp.com/'
-        const dev = 'http://localhost:3000/getUserByEmail/'
-        fetch(`${dev}${userEmail}`)
+        const url = 'https://boards-r-us-mm.herokuapp.com/getUserByEmail/'
+        fetch(`${url}${userEmail}`)
         .then(response => {
         
           if (response.ok) {
@@ -77,10 +75,9 @@ class Gmail extends Component {
 
         newUser.name = name;
         newUser.email = email;
-        const url = 'https://boards-r-us-mm.herokuapp.com/checkIfUserIsSigned'
-        const prox = 'https://cors-anywhere.herokuapp.com/'
-        const dev = 'http://localhost:3000/addNewUser'
-        fetch(`${dev}`, {
+    
+        const url = 'https://boards-r-us-mm.herokuapp.com/addNewUser'
+        fetch(`${url}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
