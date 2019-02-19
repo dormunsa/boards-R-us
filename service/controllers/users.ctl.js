@@ -157,14 +157,20 @@ module.exports = {
             snowboardCtl.getSnowboardByStyleAndGender(newRidingStyle, userGender)
             .then(async (styleDocs) => {
                 console.log(styleDocs)
+                var isShowInList = false
                 // creating a new top picks list for the user that doesn't contain disliked snowboard
                 for (var i = 0; i < styleDocs.length; i++) {
                     if(newDislikeList.length > 0 ){
+                        isShowInList = false
                         for (var j = 0; j < newDislikeList.length; j++) {
-                            if (styleDocs[i].id != snowboardID && topPicksCount < 5 && styleDocs[i].id != newDislikeList[j]) {
-                                newTopPicks.push(styleDocs[i])
-                                topPicksCount++
+                            if (styleDocs[i].id == newDislikeList[j]) {
+                                isShowInList = true
+                                break;
                             }
+                        }
+                        if (styleDocs[i].id != snowboardID && topPicksCount < 5 && !isShowInList) {
+                            newTopPicks.push(styleDocs[i])
+                            topPicksCount++
                         }
                     } else {
                         if (styleDocs[i].id != snowboardID && topPicksCount < 5) {

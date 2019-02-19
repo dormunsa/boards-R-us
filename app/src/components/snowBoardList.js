@@ -9,6 +9,7 @@ import Modal from 'react-responsive-modal';
 class SnowBoardList extends Component {
 
     constructor(props) {
+        debugger
         super(props)
         if (props.user) {
             this.state = {
@@ -172,7 +173,7 @@ class SnowBoardList extends Component {
                         this.setState(prevSate => ({
                             User: item,
                             hasProfile: true,
-                            boards: data.topPicks
+                            boards: item.topPicks
                         }))
                     })
 
