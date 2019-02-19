@@ -10,6 +10,14 @@ class SnowBoard extends Component {
         // this.markDisLike = this.markDisLike.bind(this)
       
     }
+
+    componentWillMount(){
+        debugger
+        var self = this;
+        self.setState({
+            board: this.props.board
+        })
+    }
   
     render() {
         const self = this;
