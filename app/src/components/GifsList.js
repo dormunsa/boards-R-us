@@ -7,26 +7,26 @@ import Modal from 'react-responsive-modal';
 class GifsList extends Component {
 
     constructor(props) {
-       
-      debugger
             super(props)
             if (props.user) {
                 this.state = { Gifs: [] , open: false , User:props.user, date: "" , fileSource : ""}
             } else {
                 this.state = { Gifs: [] , open: false }
             }
-    
         this.eachEvent = this.eachEvent.bind(this)
         this.add = this.add.bind(this)
         this.addGif = this.addGif.bind(this)
         this.getDateFromUser = this.getDateFromUser.bind(this)
         this.getSourceFromUser = this.getSourceFromUser.bind(this)
-      
-    
+        this.getTopGIFS = this.getTopGIFS.bind(this)
     }
     componentWillMount() {
-       
         var self=this
+        self.getTopGIFS(false);
+    }
+
+    getTopGIFS( isOpen ){
+        var self = this
         const url = 'https://boards-r-us-mm.herokuapp.com/checkIfUserIsSigned'
         const prox = 'https://cors-anywhere.herokuapp.com/'
         const dev = 'http://localhost:3000/getTopGIFs'
@@ -41,10 +41,9 @@ class GifsList extends Component {
           }
         })
         .then(data => data.map(item => {
-           
-            self.add(item.fileSource , item.id , item.userID );
+           debugger
+            self.add( data , item.fileSource , item.id , item.userID ,isOpen);
         }))
-        
     }
     
             logo = {
@@ -55,17 +54,27 @@ class GifsList extends Component {
             }
            
 
-    add( source , id , userId) {
-        this.setState(prevSate => ({
-            Gifs: [ 
-                ...prevSate.Gifs,
-                {
-                    source: source,
-                    id: id,
-                    userId: userId
-                }
-            ]
-        }))
+    add( allGifs , source , id , userId , open) {
+        
+        if(this.state.Gifs.length < 4){
+            this.setState(prevSate => ({
+                Gifs: [ 
+                    ...prevSate.Gifs,
+                    {
+                        fileSource: source,
+                        id: id,
+                        userId: userId,
+                        
+                    }
+                ]
+            }))
+        } else {
+            this.setState(prevSate => ({
+                Gifs: allGifs ,
+                open: open 
+            }))
+        }
+        
         
     }
     getSourceFromUser(event) {
@@ -115,9 +124,9 @@ class GifsList extends Component {
             },
             body: newGif
         }).then(response => {
-          
+          debugger
             if (response.ok) {
-                this.setState({ open: false });
+               self.getTopGIFS(false)
                 return response.json();
             } else {
                 throw new Error('Something went wrong ...');
@@ -133,7 +142,7 @@ class GifsList extends Component {
         return(
             <div className = "col-12 col-lg-4 card card-body gifBox"  key = {`container${i}`}>
                 <Gif key={`event${i}`} gif={item}>
-                    <img style={this.logo} src = {item.source} />
+                    <img style={this.logo} src = {item.fileSource} />
                 </Gif>
             </div>
         )

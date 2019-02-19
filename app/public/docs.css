@@ -152,6 +152,9 @@ h3 {
 .slick-slide .center-x{
   display: none ;
 }
+.slick-slide .showAtCurrent{
+  display: none ;
+}
 .slick-active {
   opacity: .5 !important;
   transform: scale(0.85);
@@ -162,5 +165,8 @@ h3 {
   transform: scale(1.0) !important;
 }
 .slick-current .center-x {
+  display: block !important;
+}
+.slick-current .showAtCurrent {
   display: block !important;
 }

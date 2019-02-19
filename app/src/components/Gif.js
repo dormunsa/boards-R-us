@@ -8,6 +8,10 @@ class Gif extends Component {
         this.state = { User : {}, gif : props.gif , userid: props.gif.userId } 
         this.getUserByid = this.getUserByid.bind(this)
     }
+    componentWillReceiveProps(nextProps) {
+       
+        this.setState({ gif: nextProps.gif , userid: nextProps.gif.userId });  
+      }
 
     componentWillMount() {
         
