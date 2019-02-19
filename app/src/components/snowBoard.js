@@ -10,6 +10,10 @@ class SnowBoard extends Component {
         // this.markDisLike = this.markDisLike.bind(this)
       
     }
+    componentWillReceiveProps(nextProps) {
+        debugger
+        this.setState({ board: nextProps.board });  
+      }
 
     componentWillMount(){
         debugger
@@ -31,6 +35,8 @@ class SnowBoard extends Component {
                   <div className="event">
                          {this.props.children}
                   </div>
+                  <h5 className = "showAtCurrent">{self.state.board.brand}</h5>
+                  <h6 className = "showAtCurrent">{self.state.board.name}</h6>
                   </div>
                
                  )

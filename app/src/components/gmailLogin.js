@@ -170,7 +170,8 @@ class Gmail extends Component {
                 <GoogleLogin
                 clientId="714828973797-3630gtl4t8bs231bdmj8ke3h9clu8ua3.apps.googleusercontent.com"
                 render={renderProps => (
-                <button className = "butt1" onClick={renderProps.onClick}> Login With Gmail</button>
+                // <button className = "img-background" onClick={renderProps.onClick}></button>
+                <img onClick={renderProps.onClick} className="img-background" src="assets/Gmail_login_button.png" />
                     )}
                 buttonText="Login"
                 onSuccess={responseGoogle}

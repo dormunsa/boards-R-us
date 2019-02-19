@@ -313,9 +313,9 @@ class SnowBoardList extends Component {
                 <div className="eventList">
                     <h2 className="snowboardsTitle">SNOWBOARDS</h2>
                     <p className="topPickText">our top pick for you.</p>
-                    {/* <Slider {...settings}> */}
+                    <Slider {...settings}>
                     {this.state.boards.map(this.eachEvent)}
-                    {/* </Slider> */}
+                    </Slider>
 
                 </div>
             )
@@ -429,23 +429,7 @@ class SnowBoardList extends Component {
                 </div>
             )
         }
-        // } else {
-        //     return( 
-        //         <div className="eventList">
-        //             <div className = "textCenter">
-        //             <h2 className = "card-title" style = {{marginBottom : "40px"}}>SNOWBOARDS</h2>
-
-        //             </div>
-        //             <div className = "container">
-        //              <div className = "row">
-        //              <a style = {{top: "0px"}} className="myButton">Get Start Now</a>
-        //              </div>
-        //             </div>
-
-        //         </div>
-        //     )
-
-        // }
+       
     }
 }
 
