@@ -7,10 +7,20 @@
     font-size: 30px;
     cursor: pointer;
   }
-  .center-x:hover{
-    
-    font-size: 35px;
-    
+ 
+  .top{
+    margin-top: 15px;
+  }
+  .footer-text{
+    position: relative;
+    top: 40px;
+    color: white;
+  }
+  .center{
+    text-align: center;
+  }
+  .right{
+    float: right;
   }
   nav li a {
     color: whitesmoke !important;
@@ -104,6 +114,13 @@
     height : 90px;
     margin-right: 7px;
     margin-left: 40px;
+  }
+
+  .logo1{
+    width: 150px;
+    height : 150px;
+    margin: 0 auto;
+    
   }
   .snowboardImage {
     width: 250px;
@@ -206,13 +223,13 @@
     padding:12px 37px;
     text-decoration:none;
     position: relative;
-    top: 150px;
+    height: 50px;
     text-decoration:none;
     text-align: center;
     width: 230px;
   }
   .butt1:hover {
-    background-color:#ffffff;
+    background-color:#000;
     color : #fa0808;
   }
   .background{
@@ -220,6 +237,7 @@
   }
   
   .myButton {
+    margin-top: 20px;
     margin: 0 auto;
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #000000), color-stop(1, #0a2e52));
 	background:-moz-linear-gradient(top, #000000 5%, #0a2e52 100%);

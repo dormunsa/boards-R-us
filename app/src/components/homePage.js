@@ -61,7 +61,7 @@ class HomePage extends Component {
                         </SnowBoardList>
                         <AboutUs>
                         </AboutUs>
-                        <GifsList>
+                        <GifsList user = {self.state.User}>
                         </GifsList>
                         <Footer>
                         </Footer>

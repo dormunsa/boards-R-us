@@ -4,7 +4,7 @@ import Section1 from './section1.js';
 
 class Header extends Component {
   constructor(props) {
-    debugger
+   
     super(props)
     if (props.user) {
         this.state = {

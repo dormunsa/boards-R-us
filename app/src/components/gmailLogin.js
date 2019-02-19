@@ -13,7 +13,7 @@ import GoogleLogin from 'react-google-login';
 class Gmail extends Component {
 
     constructor(props) {
-        debugger
+      
         super(props)
         this.CheckUser = this.CheckUser.bind(this)
         this.addUser = this.addUser.bind(this)
@@ -29,7 +29,7 @@ class Gmail extends Component {
     };
 
     onCloseModal = () => {
-        this.setState({ open: false });
+        this.setState({ open: true });
     };
 
     CheckUser(response){
@@ -42,16 +42,16 @@ class Gmail extends Component {
         const dev = 'http://localhost:3000/getUserByEmail/'
         fetch(`${dev}${userEmail}`)
         .then(response => {
-           debugger
+        
           if (response.ok) {
-              debugger
+        
             return response.json();
           } else {
             throw new Error('Something went wrong ...');
           }
         })
         .then(data => {
-            debugger
+         
             if(data.length == 0) {
                 self.addUser ( userName , userEmail )
             }
@@ -68,7 +68,7 @@ class Gmail extends Component {
     }
 
     addUser( name , email ){
-        debugger
+      
         var self=this
         var newUser = {
             "name" : "",
@@ -89,7 +89,7 @@ class Gmail extends Component {
         }).then(res => res.json())
             
             .then(json => {
-                debugger
+         
                 console.log(JSON.stringify(json));
                 if(json.name != undefined){
                     this.setState(prevSate => ({
@@ -156,13 +156,18 @@ class Gmail extends Component {
                 </Section1>
                 <SnowBoardList>
                 </SnowBoardList>
-                <Modal closeOnEsc = {closeOnEsc} open={open}  center>
+                <Modal onClose={this.onCloseModal} closeOnEsc = {false}  open = {open}  closeOnOverlayClick = {false} center>
                    <div className = "container">
-                        <div className = "row">
-                            <h2> 
-                                Welcome To Boards R US Please Login With Gmail
+                        <div className = "row center">
+                            <h2 className = "col-12"> 
+                                Welcome to "Boards R Us". 
                             </h2>
-                            <GoogleLogin
+                            <h4 className = "col-12"> 
+                                The best place to find your perfect board!
+                            </h4>
+                            <img className="logo1" src="assets/logo.png"/> <br/>
+                            </div>
+                <GoogleLogin
                 clientId="714828973797-3630gtl4t8bs231bdmj8ke3h9clu8ua3.apps.googleusercontent.com"
                 render={renderProps => (
                 <button className = "butt1" onClick={renderProps.onClick}> Login With Gmail</button>
@@ -172,7 +177,7 @@ class Gmail extends Component {
                 onFailure={responseGoogle}
                 />
                         </div>
-                    </div>
+                   
                 </Modal>
                 <AboutUs>
                 </AboutUs>
