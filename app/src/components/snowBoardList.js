@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
 import SnowBoard from './snowBoard'
 import Slider from 'react-slick'
-import { MdSearch, MdSave } from 'react-icons/md';
+import { MdSave } from 'react-icons/md';
 import Modal from 'react-responsive-modal';
-// import 'slick-carousel/slick/slick-theme.css'
-// import 'slick-carousel/slick/slick.css'
 
 class SnowBoardList extends Component {
 
     constructor(props) {
-        debugger
         super(props)
+
         if (props.user) {
             this.state = {
                 User: props.user,
@@ -33,7 +31,8 @@ class SnowBoardList extends Component {
                 boards: []
             }
         }
-        this.topPicks = [];
+
+        this.topPicks = []
         this.eachEvent = this.eachEvent.bind(this)
         this.add = this.add.bind(this)
         this.updateUser = this.updateUser.bind(this)
@@ -45,24 +44,10 @@ class SnowBoardList extends Component {
         this.getLevelFromUser = this.getLevelFromUser.bind(this)
         this.getGenderFromUser = this.getGenderFromUser.bind(this)
         this.getUserByMail = this.getUserByMail.bind(this)
-        this.markDisLike = this.markDisLike.bind(this)
-      
+        this.markDisLike = this.markDisLike.bind(this)  
     }
     componentWillMount() {
-        var self = this
-        const url = 'https://boards-r-us-mm.herokuapp.com/checkIfUserIsSigned'
-        const prox = 'https://cors-anywhere.herokuapp.com/'
-        const dev = 'http://localhost:3000/getUserID/'
-        // ${this.state.User.id}
-        self.getUserByMail()
-    }
-  
-    logo = {
-        width: "50px",
-        height: "50px",
-        fontWeight: "bold",
-        display: "block",
-        margin: "0 auto "
+        this.getUserByMail()
     }
 
     add(name, topPicks) {
@@ -72,18 +57,17 @@ class SnowBoardList extends Component {
     }
 
     onOpenModal = () => {
-
-        this.setState({ open: true });
-    };
+        this.setState({ open: true })
+    }
 
     onCloseModal = () => {
-        this.setState({ open: false });
-    };
+        this.setState({ open: false })
+    }
 
     updateUser(e) {
-        debugger
-        e.preventDefault();
         var self = this
+        e.preventDefault()
+        
         var newUser = {
             "name": "",
             "id": 0,
@@ -96,6 +80,7 @@ class SnowBoardList extends Component {
             "shoeSize": 0,
             "dislikeList": [],
         }
+
         newUser.name = self.state.name;
         newUser.id = self.state.id;
         newUser.address = self.state.address;
@@ -118,114 +103,79 @@ class SnowBoardList extends Component {
             body: newUser
         }).then(response => {
             if (response.ok) {
-                return response.json();
+                return response.json()
             } else {
-                throw new Error('Something went wrong ...');
+                throw new Error('Something went wrong ...')
             }
-        })
-            .then(data => {
-                debugger;
-                console.log(JSON.stringify(data));
+        }).then(data => {
                 if (data.name != undefined) {
-
                     this.setState(prevSate => ({
                         User: data,
                         hasProfile: true,
                         boards: data.topPicks
                     }))
-                    console.log(this.state)
+                } else {
+                    alert(`No update was made.`)
                 }
-
-                else {
-                    alert(`No update was made.`);
-                }
-            })
-            .catch(err => {
-
+        }).catch(err => {
                 console.log(err)
-            });
-
-
+        })
     }
 
     getUserByMail() {
-        debugger
-        var self = this
         const url = 'https://boards-r-us-mm.herokuapp.com/getUserID/'
-        // ${this.state.User.id}
+
         if (this.props.user) {
             fetch(`${url}${this.state.id}`)
-                .then(response => {
-
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Something went wrong ...');
-                    }
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    throw new Error('Something went wrong ...')
+                }
+            }).then(data => {
+                data.map(item => {
+                    this.setState(prevSate => ({
+                        User: item,
+                        hasProfile: true,
+                        boards: item.topPicks
+                    }))
                 })
-                .then(data => {
-                    debugger
-                    data.map(item => {
-                        debugger
-                        this.setState(prevSate => ({
-                            User: item,
-                            hasProfile: true,
-                            boards: item.topPicks
-                        }))
-                    })
-
-                })
-
+            })
         }
-
     }
+
     getAddressFromUser(event) {
-
-        this.setState({
-            address: event.target.value
-        })
+        this.setState({ address: event.target.value })
     }
-    getWeightFromUser(event) {
 
-        this.setState({
-            weight: event.target.value
-        })
+    getWeightFromUser(event) {
+        this.setState({ weight: event.target.value })
     }
 
     getHeightFromUser(event) {
-
-        this.setState({
-            height: event.target.value
-        })
+        this.setState({ height: event.target.value })
     }
+
     getShoeSizeFromUser(event) {
-
-        this.setState({
-            shoeSize: event.target.value
-        })
+        this.setState({ shoeSize: event.target.value })
     }
+
     getStyleFromUser(event) {
-
-        this.setState({
-            ridingStyle: event.target.value
-        })
+        this.setState({ ridingStyle: event.target.value })
     }
+
     getLevelFromUser(event) {
-
-        this.setState({
-            level: event.target.value
-        })
+        this.setState({ level: event.target.value })
     }
-    getGenderFromUser(event) {
 
-        this.setState({
-            gender: event.target.value
-        })
+    getGenderFromUser(event) {
+        this.setState({ gender: event.target.value })
     }
 
     markDisLike(id) {
-        debugger
         var self = this
+
         var reqBody = {
             "snowboardID": 0,
             "userID": 0,
@@ -241,7 +191,6 @@ class SnowBoardList extends Component {
         reqBody.dislikeList = self.state.User.dislikeList;
         reqBody = JSON.stringify(reqBody)
 
-      
         const url = 'https://boards-r-us-mm.herokuapp.com/markDislikeSnowboard'
 
         fetch(`${url}`, {
@@ -251,48 +200,37 @@ class SnowBoardList extends Component {
             },
             body: reqBody
         }).then(response => {
-            debugger
             if (response.ok) {
-                return response.json();
+                return response.json()
             } else {
-                throw new Error('Something went wrong ...');
+                throw new Error('Something went wrong ...')
             }
-        })
-            .then(data => {
-                debugger
-                console.log(JSON.stringify(data));
-                if (data.name != undefined) {
-                    debugger;
-                    self.setState(prevSate => ({
-                        User: data,
-                        boards: data.topPicks,
-                        open: false
-                    }))
-
-                }
-
-                else {
-                    alert(`No update was made.`);
-                }
-            })
-            .catch(err => {
-
+        }).then(data => {
+            if (data.name != undefined) {
+                self.setState(prevSate => ({
+                    User: data,
+                    boards: data.topPicks,
+                    open: false
+                }))
+            } else {
+                    alert(`No update was made.`)
+            }
+        }).catch(err => {
                 console.log(err)
-            });
+        })
     }
+
     eachEvent(item, i) {
-        debugger
-        console.log(this.state)
         return (
             <SnowBoard key={`event${i}`} markDisLike={this.markDisLike} user={this.state.User} board={item}>
-                <img className="snowboardImage" src={item.imageSource} />
+                <img className="snowboardImage" src={item.imageSource}/>
             </SnowBoard>
-
         )
     }
 
     render() {
-        const self = this;
+        const self = this
+
         const settings = {
             className: "center",
             centerMode: true,
@@ -300,105 +238,94 @@ class SnowBoardList extends Component {
             centerPadding: "60px",
             slidesToShow: 3,
             speed: 600,
-            // autoplay: true,
-            // autoplaySpeed: 3000,
+            autoplay: true,
+            autoplaySpeed: 4000,
         }
-        debugger;
+
         if (this.state.boards.length != 0) {
             return (
                 <div className="eventList">
-                    <h2 className="snowboardsTitle">SNOWBOARDS</h2>
-                    <p className="topPickText">our top pick for you.</p>
-                    <Slider {...settings}>
-                    {this.state.boards.map(this.eachEvent)}
-                    </Slider>
+                    <h2 className="snowboardsTitle general-font centeredText">SNOWBOARDS</h2>
+                    <p className="topPickText general-font centeredText">These are our top matches for you.</p>
 
+                    <Slider {...settings}>
+                        {this.state.boards.map(this.eachEvent)}
+                    </Slider>
                 </div>
             )
         } else {
-            const { open } = this.state;
+            const { open } = this.state
+
             return (
                 <div className="eventList">
-                    <div className="textCenter">
-                        <h2 className="card-title" style={{ marginBottom: "40px" }}>SNOWBOARDS</h2>
-                        <h5>We can see that you don't have a profile yet. </h5>
-                        <h5>We strongly recommend you to create one so our system <br /> will find the best boards that match you. </h5>
-
-                    </div>
+                    <h2 className="snowboardsTitle general-font centeredText">SNOWBOARDS</h2>
+                    <h6 className="general-font centeredText createProfileText">We can see that you don't have a profile yet.
+                    <br/><br/>We strongly recommend you to create one so our system will find the best boards that match you.</h6>
                     <div className="container">
                         <div className="row">
                             <div>
-
                                 <Modal open={open} onClose={this.onCloseModal} center>
                                     <div className="container">
                                         <div className="searchForm">
                                             <form onSubmit={self.updateUser}>
                                                 <h6>Please Fill The Following Fields:</h6>
-                                                <div className="container">
 
+                                                <div className="container">
                                                     <div className="row top-space first">
                                                         <label className="SearchLabel col-6">
                                                             Address:
-                        </label>
+                                                        </label>
                                                         <input className="SearchLabel col-6" required type="text" name="Address" onChange={self.getAddressFromUser} />
-
                                                     </div>
 
                                                     <div className="row top-space">
                                                         <label className="SearchLabel col-6">
                                                             Weight:
-                        </label>
+                                                        </label>
                                                         <input className="SearchLabel col-6" required type="number" name="Weight" onChange={self.getWeightFromUser} />
-
                                                     </div>
-
 
                                                     <div className="row top-space">
                                                         <label className="SearchLabel col-6">
                                                             Height:
-                        </label>
+                                                        </label>
                                                         <input className="SearchLabel col-6" required type="number" name="Height" onChange={self.getHeightFromUser} />
-
                                                     </div>
 
                                                     <div className="row top-space">
                                                         <label className="SearchLabel col-6">
                                                             Shoe Size:
-                        </label>
+                                                        </label>
                                                         <input className="SearchLabel col-6" required type="number" name="Shoe" onChange={self.getShoeSizeFromUser} />
-
                                                     </div>
 
                                                     <div className="row top-space">
                                                         <label className="SearchLabel col-6">
                                                             Riding Style:
-                        </label>
+                                                        </label>
                                                         <select required id="Style" name="Style" onChange={self.getStyleFromUser}>
                                                             <option >Select Riding Style</option>
                                                             <option value="All-mountain">All-mountain</option>
                                                             <option value="Freestyle">Freestyle</option>
                                                             <option value="Splitboard">Splitboard</option>
-
                                                         </select>
-
                                                     </div>
 
                                                     <div className="row top-space">
                                                         <label className="SearchLabel col-6">
                                                             Gender:
-                        </label>
+                                                        </label>
                                                         <select required id="Style" name="Gender" onChange={self.getGenderFromUser}>
                                                             <option >Select Gender</option>
                                                             <option value="Women">Women</option>
                                                             <option value="Men">Men</option>
-
                                                         </select>
-
                                                     </div>
+
                                                     <div className="row top-space">
                                                         <label className="SearchLabel col-6" >
                                                             Riding Level:
-                        </label>
+                                                        </label>
                                                         <select required id="Level" name="Level" onChange={self.getLevelFromUser}>
                                                             <option >Select Level</option>
                                                             <option value="1">1</option>
@@ -407,25 +334,24 @@ class SnowBoardList extends Component {
                                                             <option value="4">4</option>
                                                             <option value="5">5</option>
                                                         </select>
-
                                                     </div>
 
                                                     <br />
                                                 </div>
+                                                
                                                 <button type="submit" className="btn btn-primary card-button right"><MdSave /></button>
                                             </form>
                                         </div>
                                     </div>
                                 </Modal>
                             </div>
-                            <a onClick={this.onOpenModal} style={{ top: "10px", color: "#fff" }} className="myButton">Create Profile</a>
+                            <a onClick={this.onOpenModal} style={{ top: "10px", color: "#fff" }} className="generalButton">Create Profile</a>
                         </div>
                     </div>
 
                 </div>
             )
-        }
-       
+        }  
     }
 }
 

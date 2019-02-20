@@ -5,13 +5,12 @@ import SnowBoardList from './snowBoardList.js'
 import AboutUs from './aboutUs.js'
 import GifsList from './GifsList.js'
 import Footer from './footer.js'
-import Gmail from './gmailLogin.js'
 
 class HomePage extends Component {
 
     constructor(props) {
-        debugger
         super(props)
+
         if(props.user) {
             this.state = { User: props.user , isLogin : false , open: true }
         }
@@ -20,61 +19,22 @@ class HomePage extends Component {
         }
        
         document.getElementById("body-bg").style.backgroundColor = "white"
-      
-
-    
-    }
-    active = {
-        color: "#4248FF",
-        fontWeight: "bold",
-        textDecoration: "none",
-    }
-    NotActive = {
-        color: "white",
-        fontWeight: "regular",
-        textDecoration: "none",
-    }
-    header = {
-        backgroundColor: "#000000",
-        marginBottom: '20px'
-    }
-    logo = {
-        width: "50px",
-        height : "50px",
-        fontWeight : "bold"
-    }
-   
-    
+    }   
    
     render() {
-
-     
         var self=this
        
-            return(
-                <div>
-                    <Header user = {self.state.User}>
-                    </Header>
-                    <Section1 >
-                    </Section1>
-                    <SnowBoardList user = {self.state.User}>
-                        </SnowBoardList>
-                        <AboutUs>
-                        </AboutUs>
-                        <GifsList user = {self.state.User}>
-                        </GifsList>
-                        <Footer>
-                        </Footer>
-                </div>
-         )
-       
-            
-            
-       
-        
+        return(
+            <div>
+                <Header user = {self.state.User}/>
+                <Section1/>
+                <SnowBoardList user = {self.state.User}/>
+                <AboutUs/>
+                <GifsList user = {self.state.User}/>
+                <Footer/>
+            </div>
+        )    
     }
-
-
 }
 
 export default HomePage
