@@ -26,7 +26,10 @@
 .navHeader {
   background-color: black;
   opacity: 0.95;
-  height: 100px;
+  
+}
+.navbar-light .navbar-toggler{
+  outline: none !important;
 }
 .logo {
   width: 70px;
@@ -209,7 +212,7 @@ padding-bottom: 50px;
 }
 .footerBox1 {
   width: 100%;
-  height: 50px;
+  height: 60px;
   background-color: black;
 }
 .footerText {
@@ -217,6 +220,13 @@ padding-bottom: 50px;
   opacity: 0.8;
   font-size: 15px;
   padding-top: 15px;
+}
+.footerText1 {
+  color: whitesmoke;
+  opacity: 0.8;
+  font-size: 15px;
+  padding-top: 15px;
+  margin-bottom: 0px !important;
 }
 
 
@@ -320,6 +330,19 @@ kendo-combobox {
   .back{
     display: none;
   }
+  .footerText {
+    display: none
+  }
+  .footerBox {
+    display: none;
+  }
+  .generalButton {
+   margin-bottom: 20px;
+  }
+  .featuresTitle {
+  
+    padding-top: 20px !important;
+}
 }
 @media only screen and (min-width : 480px) {
   .gifBox {
@@ -327,6 +350,13 @@ kendo-combobox {
     max-width: 25% !important;
     padding: 0.5rem !important;
   }
+  .footerText1 {
+    display: none
+  }
+  .footerBox1 {
+    display: none;
+  }
+  
 }
 
 @media only screen and (max-width : 430px) {
