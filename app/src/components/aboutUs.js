@@ -3,8 +3,8 @@ import React, {Component} from 'react'
 class AboutUs extends Component {
     render() {
         return(
-            <div className = "hide_mobile aboutUsCoverPic"> 
-                <h1 className="aboutUsHeadline general-font hide_mobile">Boards R Us&reg;</h1>
+            <div id="aboutUsID" className = "hide_mobile aboutUsCoverPic"> 
+                <h1 className="aboutUsHeadline general-font hide_mobile">Boards R Us &reg;</h1>
                 <p className="aboutUsParagraph general-font hide_mobile">
                     The company was originally founded by Miki Makmel and Dor Munsa at Shenkar college.<br/><br/>
                     Everything we do at "Boards R Us" started in the mountains.<br/>

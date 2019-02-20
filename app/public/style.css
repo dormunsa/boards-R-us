@@ -121,11 +121,12 @@ font-weight: 600;
 padding-top: 70px;
 }
 .createProfileText {
+  padding-top: 150px;
   padding-bottom: 100px;
 }
 .topPickText {
 color: black;
-font-size: 14px;
+font-size: 15px;
 font-weight: normal;
 padding-bottom: 50px;
 }
@@ -135,15 +136,24 @@ padding-bottom: 50px;
   cursor: pointer;
 }
 .center-x {
-  font-size: 30px;
+  font-size: 25px;
+  opacity: 0.9;
   cursor: pointer;
+}
+.brandText {
+  font-size: 24px;
+  font-weight: bold;
+  padding-top: 10px;
+}
+.nameText {
+  font-size: 16px;
 }
 
 
 /* ABOUT US */
 .aboutUsCoverPic {
   width: 100%;
-  height: 954px;
+  height: 800px;
   background-image: url("assets/section2.png");
   background-repeat: no-repeat;
   background-size: cover;
@@ -152,12 +162,12 @@ padding-bottom: 50px;
   color: white;
   font-size: 56px;
   font-weight: bold;
-  padding-top: 200px;
+  padding-top: 100px;
   padding-left: 170px;
 }
 .aboutUsParagraph {
   color: white;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 500;
   padding-top: 80px;
   padding-left: 170px;
@@ -173,7 +183,7 @@ padding-bottom: 50px;
 }
 .gifSecondHeadline {
   color: black;
-  font-size: 14px;
+  font-size: 15px;
   padding-bottom: 40px;
 }
 .gifBox {
@@ -183,13 +193,14 @@ padding-bottom: 50px;
 }
 .gifNames {
   color: black;
-  font-size: 16px;
+  font-size: 15px;
+  font-weight: bold;
   padding-top: 12px;
 }
 .gifUploadText {
   color: black;
   font-size: 18px;
-  padding-top: 50px;
+  padding-top: 60px;
   padding-bottom: 20px;
 }
 
