@@ -14,7 +14,7 @@ class Section1 extends Component {
         return(
             <div className = "hide_mobile imgCover"> 
                 <h1 className="mainText general-font hide_mobile">RUN OVER<br/>EVERYTHING</h1>
-                <button href="#" className="seeDetailsButton">SEE DETAILS</button>
+                <a href="#aboutUsID"><button className="seeDetailsButton">SEE DETAILS</button></a>
             </div>
         )
     }

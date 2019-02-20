@@ -32,8 +32,8 @@ class SnowBoard extends Component {
                     {this.props.children}
                 </div>
                 
-                <h5 className = "showAtCurrent centeredText">{self.state.board.brand}</h5>
-                <h6 className = "showAtCurrent centeredText">{self.state.board.name}</h6>
+                <h5 className="showAtCurrent centeredText general-font brandText">{self.state.board.brand}</h5>
+                <h6 className="showAtCurrent centeredText general-font nameText">{self.state.board.name}</h6>
             </div>    
         )
     }

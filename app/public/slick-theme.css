@@ -73,8 +73,8 @@
 .slick-prev
 {
     z-index: 99 !important;
-    top: 120px;
-    left: 20px;
+    top: 130px;
+    left: 25px;
 }
 .slick-prev:before
 {
@@ -84,8 +84,8 @@
 .slick-next
 {
     z-index: 99 !important;
-    top: 120px;
-    right: 20px;
+    top: 130px;
+    right: 25px;
 }
 
 @media only screen and (max-width : 480px) {
