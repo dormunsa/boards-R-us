@@ -240,6 +240,25 @@ class SnowBoardList extends Component {
             speed: 600,
             autoplay: true,
             autoplaySpeed: 4000,
+            responsive: [
+                {
+                  breakpoint: 600,
+                  settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2,
+                    initialSlide: 2,
+                    infinite: false,
+                  }
+                },
+                {
+                  breakpoint: 480,
+                  settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    infinite: false,
+                  }
+                }
+              ]
         }
 
         if (this.state.boards.length != 0) {

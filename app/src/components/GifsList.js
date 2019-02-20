@@ -143,8 +143,9 @@ class GifsList extends Component {
                     <div className = "row">
                         {this.state.Gifs.map(this.eachEvent)}
                     </div>
+                    <h5 className = "centeredText gifUploadText general-font">Think you got what it takes to be part of our best riders? Upload your own GIF now and maybe you'll get there!</h5> 
                 </div> 
-                <h5 className = "centeredText gifUploadText general-font">Think you got what it takes to be part of our best riders? Upload your own GIF now and maybe you'll get there!</h5> 
+                
 
                 <a onClick={this.onOpenModal} style={{ top: "10px" , color : "#fff" }} className="generalButton">Upload GIF</a>
                 <Modal open={open} onClose={this.onCloseModal} center>
@@ -172,6 +173,9 @@ class GifsList extends Component {
                         </div>
                     </div>
                 </Modal>
+                <div className="footerBox1 col-12"> 
+               <h6 className="footerText1 centeredText general-font1">&copy; 2019 Boards R Us by Miki Makmel & Dor Munsa</h6>
+            </div>
             </div>
         )
     }

@@ -88,6 +88,21 @@
     right: 20px;
 }
 
+@media only screen and (max-width : 480px) {
+    .slick-next
+    {
+        z-index: 99 !important;
+        top: 120px;
+        right: 50px !important;
+    }
+    .slick-prev
+    {
+    z-index: 99 !important;
+    top: 120px;
+    left: 50px !important;
+    }
+}
+  
 .slick-next:before
 {
     content: url(assets/rightArrow.png);

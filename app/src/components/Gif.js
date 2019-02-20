@@ -39,11 +39,11 @@ class Gif extends Component {
         const self = this
 
         return(
-            <div>
+            <div className = "col-12">
                 <div>
                     {this.props.children}
                 </div>
-                <h6 className= "centeredText gifNames general-font"><i class="far fa-snowflake"></i> {self.state.User.name} <i class="far fa-snowflake"></i></h6>
+                <h6 className= "centeredText gifNames general-font"><i className="far fa-snowflake"></i> {self.state.User.name} <i className="far fa-snowflake"></i></h6>
             </div> 
         )
     }

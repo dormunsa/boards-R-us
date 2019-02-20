@@ -176,11 +176,7 @@ padding-bottom: 50px;
   font-size: 14px;
   padding-bottom: 40px;
 }
-.gifBox {
-  border: none !important;
-  max-width: 25% !important;
-  padding: 0.5rem !important;
-}
+
 .gifNames {
   color: black;
   font-size: 16px;
@@ -196,6 +192,11 @@ padding-bottom: 50px;
 
 /* FOOTER */
 .footerBox {
+  width: 100%;
+  height: 50px;
+  background-color: black;
+}
+.footerBox1 {
   width: 100%;
   height: 50px;
   background-color: black;
@@ -307,6 +308,13 @@ kendo-combobox {
   }
   .back{
     display: none;
+  }
+}
+@media only screen and (min-width : 480px) {
+  .gifBox {
+    border: none !important;
+    max-width: 25% !important;
+    padding: 0.5rem !important;
   }
 }
 
