@@ -17,7 +17,8 @@ const user_schema = new mongoose.Schema({
         weight: { type: Number, min: 30, max: 150, required: false },
         height: { type: Number, min: 30, max: 220, required: false },
         shoeSize: { type: Number, min: 30, max: 60, required: false }
-    }
+    },
+    
 
 })
 

@@ -14,6 +14,7 @@ app.use(express.urlencoded({ extended: true }))
 /*** All routes ***/
 app.get('/getAllSnowboards'     ,snowboardCtl.getAllSnowboards)
 app.get('/getSnowboardByID/:id' ,snowboardCtl.getSnowboardByID)
+app.get('/getSnowboardByName/:name' ,snowboardCtl.getSnowboardByName)
 app.post('/addNewSnowboard'     ,snowboardCtl.addNewSnowboard)
 
 app.get('/getUserID/:id' ,userCtl.getUserByid)

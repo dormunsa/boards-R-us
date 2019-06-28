@@ -24,6 +24,18 @@ module.exports = {
         else res.status(404).send("not found")
     },
 
+    async getSnowboardByName(req, res) {
+        console.log("getSnowboardByName()")
+
+        snowboardName = req.params.name
+
+
+        const docs = await Snowboard.find({ $or:[{"name": { "$regex":snowboardName, "$options": "i" }} , {"brand": { "$regex":snowboardName, "$options": "i" }}]  } )
+
+        if (docs) res.json(docs)
+        else res.status(404).send("not found")
+    },
+
     // get all the snowboards belongs to a spesific style from db.
     async getSnowboardByStyleAndGender(style, gender) {
         console.log("getSnowboardByStyleAndGender()")
